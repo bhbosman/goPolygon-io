@@ -1,0 +1,28 @@
+syntax = "proto3";
+import "google/protobuf/descriptor.proto";
+package golang.example.policy;
+option go_package = "/stream";
+
+message PolygonMessageRequest{
+  string action = 1;
+  string params = 2;
+};
+
+message PolygonMessageResponse{
+  string ev = 1;
+  string status = 2;
+  string message = 3;
+  double a = 4;
+  double b = 5;
+  int64 t = 6;
+  int64 x = 7;
+  string p = 8;
+  string pair = 9;
+  double o = 10;
+  double c = 11;
+  double h = 12;
+  double l = 13;
+  int64 v = 14;
+  int64 s = 15;
+  int64 e = 16;
+ };
