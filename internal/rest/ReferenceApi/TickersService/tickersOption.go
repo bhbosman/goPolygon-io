@@ -10,6 +10,10 @@ type tickersOption struct {
 	value string
 }
 
+func TickersOption(key string, value string) *tickersOption {
+	return &tickersOption{key: key, value: value}
+}
+
 func (self *tickersOption) applyTickersOption() string {
 	return fmt.Sprintf("%v=%v", self.key, self.value)
 }

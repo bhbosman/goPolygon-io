@@ -7,6 +7,10 @@ type tickerTypesOption struct {
 	value string
 }
 
+func TickerTypesOption(key string, value string) *tickerTypesOption {
+	return &tickerTypesOption{key: key, value: value}
+}
+
 func (self *tickerTypesOption) applyTickerTypesOption() string {
 	return fmt.Sprintf("%v=%v", self.key, self.value)
 }

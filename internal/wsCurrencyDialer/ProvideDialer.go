@@ -23,15 +23,15 @@ func ProvideDialer(options ...IDialerSetting) fx.Option {
 				Group: "CFR",
 				Target: func(params struct {
 					fx.In
-					ApiKey                    string `name:"Polygon-io.API.Key"`
-					FxRegistration            string `name:"Polygon-io.WS.FX.Registration.C"`
-					FxAggregationRegistration string `name:"Polygon-io.WS.FX.Registration.CA"`
+					ApiKey                            string `name:"Polygon-io.API.Key"`
+					FxCurrencyRegistration            string `name:"Polygon-io.WS.FX.Registration.C"`
+					FxCurrencyAggregationRegistration string `name:"Polygon-io.WS.FX.Registration.CA"`
 				}) (intf.IConnectionReactorFactory, error) {
 					return NewConnectionReactorFactory(
 						crfName,
 						params.ApiKey,
-						params.FxRegistration,
-						params.FxAggregationRegistration), nil
+						params.FxCurrencyRegistration,
+						params.FxCurrencyAggregationRegistration), nil
 				},
 			}),
 		fx.Provide(

@@ -1,4 +1,4 @@
-package TickerTypesService
+package TickerNewsService
 
 import (
 	"fmt"
@@ -9,21 +9,21 @@ import (
 	"strings"
 )
 
-type TickerTypesService struct {
+type TickerNewsService struct {
 	client *http.Client
 }
 
-func NewTickerTypesService(client *http.Client) *TickerTypesService {
-	return &TickerTypesService{client: client}
+func NewTickerNewsService(client *http.Client) *TickerNewsService {
+	return &TickerNewsService{client: client}
 }
 
-func (self *TickerTypesService) TickerTypes(options ...ITickerTypesServiceOption) (*stream.ReferenceDataTickerTypesResponse, error) {
+func (self *TickerNewsService) TickerNews(options ...ITickerDetailsServiceOption) (*stream.ReferenceDataTickerNewsResponse, error) {
 	var sa []string
 	for _, option := range options {
 		if option == nil {
 			continue
 		}
-		s := option.applyTickerTypesOption()
+		s := option.applyTickerDetailsServiceOption()
 		if s == "" {
 			continue
 		}
@@ -32,7 +32,7 @@ func (self *TickerTypesService) TickerTypes(options ...ITickerTypesServiceOption
 	params := strings.Join(sa, "&")
 
 	url := func(params string) string {
-		url := "https://api.polygon.io/v3/reference/tickers/types"
+		url := "https://api.polygon.io/v2/reference/news"
 		switch {
 		case params == "":
 			return url
@@ -54,12 +54,23 @@ func (self *TickerTypesService) TickerTypes(options ...ITickerTypesServiceOption
 	defer func() {
 		_ = response.Body.Close()
 	}()
-	return readReferenceDataTickerTypesResponse(response.Body)
 
+	return readReferenceDataTickerNewsResponse(response.Body)
 }
 
-func readReferenceDataTickerTypesResponse(body io.Reader) (*stream.ReferenceDataTickerTypesResponse, error) {
-	result := &stream.ReferenceDataTickerTypesResponse{}
+func (self *TickerNewsService) TickerNewsNext(nextUrl string) (*stream.ReferenceDataTickerNewsResponse, error) {
+	response, err := self.client.Get(nextUrl)
+	if err != nil {
+		return nil, err
+	}
+	defer func() {
+		_ = response.Body.Close()
+	}()
+	return readReferenceDataTickerNewsResponse(response.Body)
+}
+
+func readReferenceDataTickerNewsResponse(body io.Reader) (*stream.ReferenceDataTickerNewsResponse, error) {
+	result := &stream.ReferenceDataTickerNewsResponse{}
 	unmarshaler := jsonpb.Unmarshaler{
 		AllowUnknownFields: true,
 		AnyResolver:        nil,

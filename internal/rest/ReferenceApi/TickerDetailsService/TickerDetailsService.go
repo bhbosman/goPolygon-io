@@ -32,10 +32,10 @@ func (self *TickerDetailsService) TickerDetails(stocksTicker string) (*stream.Re
 	defer func() {
 		_ = response.Body.Close()
 	}()
-	return self.readReferenceDataTickerDetails(response.Body)
+	return readReferenceDataTickerDetails(response.Body)
 }
 
-func (self *TickerDetailsService) readReferenceDataTickerDetails(body io.Reader) (*stream.ReferenceDataTickerDetails, error) {
+func readReferenceDataTickerDetails(body io.Reader) (*stream.ReferenceDataTickerDetails, error) {
 	result := &stream.ReferenceDataTickerDetails{}
 	unmarshaler := jsonpb.Unmarshaler{
 		AllowUnknownFields: true,

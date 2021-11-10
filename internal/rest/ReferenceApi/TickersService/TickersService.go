@@ -56,7 +56,7 @@ func (self *TickersService) Tickers(options ...ITickersServiceOption) (*stream.R
 	defer func() {
 		_ = response.Body.Close()
 	}()
-	return self.readReferenceDataTickersResponse(response.Body)
+	return readReferenceDataTickersResponse(response.Body)
 }
 
 func (self *TickersService) TickersNext(nextUrl string) (*stream.ReferenceDataTickersResponse, error) {
@@ -67,10 +67,10 @@ func (self *TickersService) TickersNext(nextUrl string) (*stream.ReferenceDataTi
 	defer func() {
 		_ = response.Body.Close()
 	}()
-	return self.readReferenceDataTickersResponse(response.Body)
+	return readReferenceDataTickersResponse(response.Body)
 }
 
-func (self *TickersService) readReferenceDataTickersResponse(body io.Reader) (*stream.ReferenceDataTickersResponse, error) {
+func readReferenceDataTickersResponse(body io.Reader) (*stream.ReferenceDataTickersResponse, error) {
 	result := &stream.ReferenceDataTickersResponse{}
 	unmarshaler := jsonpb.Unmarshaler{
 		AllowUnknownFields: true,

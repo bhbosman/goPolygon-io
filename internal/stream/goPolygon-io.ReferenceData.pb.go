@@ -355,7 +355,7 @@ type ReferenceDataTickerTypesResponse struct {
 	Status    string                      `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 	RequestId string                      `protobuf:"bytes,2,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
 	Count     int64                       `protobuf:"varint,3,opt,name=count,proto3" json:"count,omitempty"`
-	Results   []*ReferenceDataTickerTypes `protobuf:"bytes,5,rep,name=results,proto3" json:"results,omitempty"`
+	Results   []*ReferenceDataTickerTypes `protobuf:"bytes,4,rep,name=results,proto3" json:"results,omitempty"`
 }
 
 func (x *ReferenceDataTickerTypesResponse) Reset() {
@@ -697,6 +697,262 @@ func (self *ReferenceDataTickerDetails) TypeCode() uint32 {
 	return ReferenceDataTickerDetailsTypeCode
 }
 
+type NewsPublisher struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *NewsPublisher) Reset() {
+	*x = NewsPublisher{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_goPolygon_io_ReferenceData_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *NewsPublisher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewsPublisher) ProtoMessage() {}
+
+func (x *NewsPublisher) ProtoReflect() protoreflect.Message {
+	mi := &file_goPolygon_io_ReferenceData_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewsPublisher.ProtoReflect.Descriptor instead.
+func (*NewsPublisher) Descriptor() ([]byte, []int) {
+	return file_goPolygon_io_ReferenceData_proto_rawDescGZIP(), []int{5}
+}
+
+func (self *NewsPublisher) TypeCode() uint32 {
+	return NewsPublisherTypeCode
+}
+
+type ReferenceDataTickerNews struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id           string         `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Publisher    *NewsPublisher `protobuf:"bytes,2,opt,name=publisher,proto3" json:"publisher,omitempty"`
+	Title        string         `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Author       string         `protobuf:"bytes,4,opt,name=author,proto3" json:"author,omitempty"`
+	PublishedUtc string         `protobuf:"bytes,5,opt,name=published_utc,json=publishedUtc,proto3" json:"published_utc,omitempty"`
+	ArticleUrl   string         `protobuf:"bytes,6,opt,name=article_url,json=articleUrl,proto3" json:"article_url,omitempty"`
+	Tickers      []string       `protobuf:"bytes,7,rep,name=tickers,proto3" json:"tickers,omitempty"`
+	AmpUrl       string         `protobuf:"bytes,8,opt,name=amp_url,json=ampUrl,proto3" json:"amp_url,omitempty"`
+	ImageUrl     string         `protobuf:"bytes,9,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
+	Description  string         `protobuf:"bytes,10,opt,name=description,proto3" json:"description,omitempty"`
+	Keywords     []string       `protobuf:"bytes,11,rep,name=keywords,proto3" json:"keywords,omitempty"`
+}
+
+func (x *ReferenceDataTickerNews) Reset() {
+	*x = ReferenceDataTickerNews{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_goPolygon_io_ReferenceData_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ReferenceDataTickerNews) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReferenceDataTickerNews) ProtoMessage() {}
+
+func (x *ReferenceDataTickerNews) ProtoReflect() protoreflect.Message {
+	mi := &file_goPolygon_io_ReferenceData_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReferenceDataTickerNews.ProtoReflect.Descriptor instead.
+func (*ReferenceDataTickerNews) Descriptor() ([]byte, []int) {
+	return file_goPolygon_io_ReferenceData_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ReferenceDataTickerNews) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *ReferenceDataTickerNews) GetPublisher() *NewsPublisher {
+	if x != nil {
+		return x.Publisher
+	}
+	return nil
+}
+
+func (x *ReferenceDataTickerNews) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *ReferenceDataTickerNews) GetAuthor() string {
+	if x != nil {
+		return x.Author
+	}
+	return ""
+}
+
+func (x *ReferenceDataTickerNews) GetPublishedUtc() string {
+	if x != nil {
+		return x.PublishedUtc
+	}
+	return ""
+}
+
+func (x *ReferenceDataTickerNews) GetArticleUrl() string {
+	if x != nil {
+		return x.ArticleUrl
+	}
+	return ""
+}
+
+func (x *ReferenceDataTickerNews) GetTickers() []string {
+	if x != nil {
+		return x.Tickers
+	}
+	return nil
+}
+
+func (x *ReferenceDataTickerNews) GetAmpUrl() string {
+	if x != nil {
+		return x.AmpUrl
+	}
+	return ""
+}
+
+func (x *ReferenceDataTickerNews) GetImageUrl() string {
+	if x != nil {
+		return x.ImageUrl
+	}
+	return ""
+}
+
+func (x *ReferenceDataTickerNews) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *ReferenceDataTickerNews) GetKeywords() []string {
+	if x != nil {
+		return x.Keywords
+	}
+	return nil
+}
+
+func (self *ReferenceDataTickerNews) TypeCode() uint32 {
+	return ReferenceDataTickerNewsTypeCode
+}
+
+type ReferenceDataTickerNewsResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Status    string                     `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	RequestId string                     `protobuf:"bytes,2,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
+	Count     int64                      `protobuf:"varint,3,opt,name=count,proto3" json:"count,omitempty"`
+	NextUrl   string                     `protobuf:"bytes,4,opt,name=next_url,json=nextUrl,proto3" json:"next_url,omitempty"`
+	Results   []*ReferenceDataTickerNews `protobuf:"bytes,5,rep,name=results,proto3" json:"results,omitempty"`
+}
+
+func (x *ReferenceDataTickerNewsResponse) Reset() {
+	*x = ReferenceDataTickerNewsResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_goPolygon_io_ReferenceData_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ReferenceDataTickerNewsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReferenceDataTickerNewsResponse) ProtoMessage() {}
+
+func (x *ReferenceDataTickerNewsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_goPolygon_io_ReferenceData_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReferenceDataTickerNewsResponse.ProtoReflect.Descriptor instead.
+func (*ReferenceDataTickerNewsResponse) Descriptor() ([]byte, []int) {
+	return file_goPolygon_io_ReferenceData_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ReferenceDataTickerNewsResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ReferenceDataTickerNewsResponse) GetRequestId() string {
+	if x != nil {
+		return x.RequestId
+	}
+	return ""
+}
+
+func (x *ReferenceDataTickerNewsResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+func (x *ReferenceDataTickerNewsResponse) GetNextUrl() string {
+	if x != nil {
+		return x.NextUrl
+	}
+	return ""
+}
+
+func (x *ReferenceDataTickerNewsResponse) GetResults() []*ReferenceDataTickerNews {
+	if x != nil {
+		return x.Results
+	}
+	return nil
+}
+
+func (self *ReferenceDataTickerNewsResponse) TypeCode() uint32 {
+	return ReferenceDataTickerNewsResponseTypeCode
+}
+
 var File_goPolygon_io_ReferenceData_proto protoreflect.FileDescriptor
 
 var file_goPolygon_io_ReferenceData_proto_rawDesc = []byte{
@@ -767,7 +1023,7 @@ var file_goPolygon_io_ReferenceData_proto_rawDesc = []byte{
 	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x63, 0x6f,
 	0x75, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x63, 0x6f, 0x75, 0x6e, 0x74,
-	0x12, 0x49, 0x0a, 0x07, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x73, 0x18, 0x05, 0x20, 0x03, 0x28,
+	0x12, 0x49, 0x0a, 0x07, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28,
 	0x0b, 0x32, 0x2f, 0x2e, 0x67, 0x6f, 0x6c, 0x61, 0x6e, 0x67, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70,
 	0x6c, 0x65, 0x2e, 0x70, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x2e, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65,
 	0x6e, 0x63, 0x65, 0x44, 0x61, 0x74, 0x61, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x72, 0x54, 0x79, 0x70,
@@ -818,8 +1074,46 @@ var file_goPolygon_io_ReferenceData_proto_rawDesc = []byte{
 	0x03, 0x28, 0x09, 0x52, 0x04, 0x74, 0x61, 0x67, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x69, 0x6d,
 	0x69, 0x6c, 0x61, 0x72, 0x18, 0x1c, 0x20, 0x03, 0x28, 0x09, 0x52, 0x07, 0x73, 0x69, 0x6d, 0x69,
 	0x6c, 0x61, 0x72, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x63, 0x74, 0x69, 0x76, 0x65, 0x18, 0x1d, 0x20,
-	0x01, 0x28, 0x08, 0x52, 0x06, 0x61, 0x63, 0x74, 0x69, 0x76, 0x65, 0x42, 0x09, 0x5a, 0x07, 0x2f,
-	0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x01, 0x28, 0x08, 0x52, 0x06, 0x61, 0x63, 0x74, 0x69, 0x76, 0x65, 0x22, 0x0f, 0x0a, 0x0d, 0x4e,
+	0x65, 0x77, 0x73, 0x50, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x65, 0x72, 0x22, 0xef, 0x02, 0x0a,
+	0x17, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x44, 0x61, 0x74, 0x61, 0x54, 0x69,
+	0x63, 0x6b, 0x65, 0x72, 0x4e, 0x65, 0x77, 0x73, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x42, 0x0a, 0x09, 0x70, 0x75, 0x62, 0x6c,
+	0x69, 0x73, 0x68, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x24, 0x2e, 0x67, 0x6f,
+	0x6c, 0x61, 0x6e, 0x67, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x70, 0x6f, 0x6c,
+	0x69, 0x63, 0x79, 0x2e, 0x4e, 0x65, 0x77, 0x73, 0x50, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x65,
+	0x72, 0x52, 0x09, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x65, 0x72, 0x12, 0x14, 0x0a, 0x05,
+	0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74,
+	0x6c, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x18, 0x04, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x06, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x12, 0x23, 0x0a, 0x0d, 0x70, 0x75,
+	0x62, 0x6c, 0x69, 0x73, 0x68, 0x65, 0x64, 0x5f, 0x75, 0x74, 0x63, 0x18, 0x05, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x0c, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x65, 0x64, 0x55, 0x74, 0x63, 0x12,
+	0x1f, 0x0a, 0x0b, 0x61, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x06,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x61, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x55, 0x72, 0x6c,
+	0x12, 0x18, 0x0a, 0x07, 0x74, 0x69, 0x63, 0x6b, 0x65, 0x72, 0x73, 0x18, 0x07, 0x20, 0x03, 0x28,
+	0x09, 0x52, 0x07, 0x74, 0x69, 0x63, 0x6b, 0x65, 0x72, 0x73, 0x12, 0x17, 0x0a, 0x07, 0x61, 0x6d,
+	0x70, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x61, 0x6d, 0x70,
+	0x55, 0x72, 0x6c, 0x12, 0x1b, 0x0a, 0x09, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x5f, 0x75, 0x72, 0x6c,
+	0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x55, 0x72, 0x6c,
+	0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18,
+	0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69,
+	0x6f, 0x6e, 0x12, 0x1a, 0x0a, 0x08, 0x6b, 0x65, 0x79, 0x77, 0x6f, 0x72, 0x64, 0x73, 0x18, 0x0b,
+	0x20, 0x03, 0x28, 0x09, 0x52, 0x08, 0x6b, 0x65, 0x79, 0x77, 0x6f, 0x72, 0x64, 0x73, 0x22, 0xd3,
+	0x01, 0x0a, 0x1f, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x44, 0x61, 0x74, 0x61,
+	0x54, 0x69, 0x63, 0x6b, 0x65, 0x72, 0x4e, 0x65, 0x77, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x1d, 0x0a, 0x0a, 0x72, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09,
+	0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x63, 0x6f, 0x75,
+	0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12,
+	0x19, 0x0a, 0x08, 0x6e, 0x65, 0x78, 0x74, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x07, 0x6e, 0x65, 0x78, 0x74, 0x55, 0x72, 0x6c, 0x12, 0x48, 0x0a, 0x07, 0x72, 0x65,
+	0x73, 0x75, 0x6c, 0x74, 0x73, 0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2e, 0x2e, 0x67, 0x6f,
+	0x6c, 0x61, 0x6e, 0x67, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x70, 0x6f, 0x6c,
+	0x69, 0x63, 0x79, 0x2e, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x44, 0x61, 0x74,
+	0x61, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x72, 0x4e, 0x65, 0x77, 0x73, 0x52, 0x07, 0x72, 0x65, 0x73,
+	0x75, 0x6c, 0x74, 0x73, 0x42, 0x09, 0x5a, 0x07, 0x2f, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -834,22 +1128,27 @@ func file_goPolygon_io_ReferenceData_proto_rawDescGZIP() []byte {
 	return file_goPolygon_io_ReferenceData_proto_rawDescData
 }
 
-var file_goPolygon_io_ReferenceData_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_goPolygon_io_ReferenceData_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_goPolygon_io_ReferenceData_proto_goTypes = []interface{}{
 	(*ReferenceDataTickers)(nil),             // 0: golang.example.policy.ReferenceDataTickers
 	(*ReferenceDataTickersResponse)(nil),     // 1: golang.example.policy.ReferenceDataTickersResponse
 	(*ReferenceDataTickerTypes)(nil),         // 2: golang.example.policy.ReferenceDataTickerTypes
 	(*ReferenceDataTickerTypesResponse)(nil), // 3: golang.example.policy.ReferenceDataTickerTypesResponse
 	(*ReferenceDataTickerDetails)(nil),       // 4: golang.example.policy.ReferenceDataTickerDetails
+	(*NewsPublisher)(nil),                    // 5: golang.example.policy.NewsPublisher
+	(*ReferenceDataTickerNews)(nil),          // 6: golang.example.policy.ReferenceDataTickerNews
+	(*ReferenceDataTickerNewsResponse)(nil),  // 7: golang.example.policy.ReferenceDataTickerNewsResponse
 }
 var file_goPolygon_io_ReferenceData_proto_depIdxs = []int32{
 	0, // 0: golang.example.policy.ReferenceDataTickersResponse.results:type_name -> golang.example.policy.ReferenceDataTickers
 	2, // 1: golang.example.policy.ReferenceDataTickerTypesResponse.results:type_name -> golang.example.policy.ReferenceDataTickerTypes
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	5, // 2: golang.example.policy.ReferenceDataTickerNews.publisher:type_name -> golang.example.policy.NewsPublisher
+	6, // 3: golang.example.policy.ReferenceDataTickerNewsResponse.results:type_name -> golang.example.policy.ReferenceDataTickerNews
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_goPolygon_io_ReferenceData_proto_init() }
@@ -918,6 +1217,42 @@ func file_goPolygon_io_ReferenceData_proto_init() {
 				return nil
 			}
 		}
+		file_goPolygon_io_ReferenceData_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*NewsPublisher); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_goPolygon_io_ReferenceData_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ReferenceDataTickerNews); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_goPolygon_io_ReferenceData_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ReferenceDataTickerNewsResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -925,7 +1260,7 @@ func file_goPolygon_io_ReferenceData_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_goPolygon_io_ReferenceData_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
@@ -953,6 +1288,15 @@ const ReferenceDataTickerTypesResponseTypeCode uint32 = 2390917286
 
 // Typecode generated from: "ReferenceDataTickerDetails"
 const ReferenceDataTickerDetailsTypeCode uint32 = 3277662500
+
+// Typecode generated from: "NewsPublisher"
+const NewsPublisherTypeCode uint32 = 3399088673
+
+// Typecode generated from: "ReferenceDataTickerNews"
+const ReferenceDataTickerNewsTypeCode uint32 = 3002393329
+
+// Typecode generated from: "ReferenceDataTickerNewsResponse"
+const ReferenceDataTickerNewsResponseTypeCode uint32 = 2230831676
 
 //true
 //true
@@ -1225,6 +1569,174 @@ var _ = stream.Register(
 			data proto.Message) (goprotoextra.IMessageWrapper, error) {
 			if msg, ok := data.(*ReferenceDataTickerDetails); ok {
 				return NewReferenceDataTickerDetailsWrapper(
+					cancelCtx,
+					cancelFunc,
+					toReactor,
+					toConnection,
+					msg), nil
+			}
+			return nil, goerrors.InvalidParam
+		}})
+
+//true
+//true
+//false
+//false
+type NewsPublisherWrapper struct {
+	goprotoextra.BaseMessageWrapper
+	Data *NewsPublisher
+}
+
+func (self *NewsPublisherWrapper) Message() interface{} {
+	return self.Data
+}
+
+func (self *NewsPublisherWrapper) messageWrapper() interface{} {
+	return self
+}
+
+func NewNewsPublisherWrapper(
+	cancelCtx context.Context,
+	cancelFunc context.CancelFunc,
+	toReactor goprotoextra.ToReactorFunc,
+	toConnection goprotoextra.ToConnectionFunc,
+	data *NewsPublisher) *NewsPublisherWrapper {
+	return &NewsPublisherWrapper{
+		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(
+			cancelCtx,
+			cancelFunc,
+			toReactor,
+			toConnection),
+		Data: data,
+	}
+}
+
+var _ = stream.Register(
+	NewsPublisherTypeCode,
+	stream.TypeCodeData{
+		CreateMessage: func() proto.Message {
+			return &NewsPublisher{}
+		},
+		CreateWrapper: func(
+			cancelCtx context.Context,
+			cancelFunc context.CancelFunc,
+			toReactor goprotoextra.ToReactorFunc,
+			toConnection goprotoextra.ToConnectionFunc,
+			data proto.Message) (goprotoextra.IMessageWrapper, error) {
+			if msg, ok := data.(*NewsPublisher); ok {
+				return NewNewsPublisherWrapper(
+					cancelCtx,
+					cancelFunc,
+					toReactor,
+					toConnection,
+					msg), nil
+			}
+			return nil, goerrors.InvalidParam
+		}})
+
+//true
+//true
+//false
+//false
+type ReferenceDataTickerNewsWrapper struct {
+	goprotoextra.BaseMessageWrapper
+	Data *ReferenceDataTickerNews
+}
+
+func (self *ReferenceDataTickerNewsWrapper) Message() interface{} {
+	return self.Data
+}
+
+func (self *ReferenceDataTickerNewsWrapper) messageWrapper() interface{} {
+	return self
+}
+
+func NewReferenceDataTickerNewsWrapper(
+	cancelCtx context.Context,
+	cancelFunc context.CancelFunc,
+	toReactor goprotoextra.ToReactorFunc,
+	toConnection goprotoextra.ToConnectionFunc,
+	data *ReferenceDataTickerNews) *ReferenceDataTickerNewsWrapper {
+	return &ReferenceDataTickerNewsWrapper{
+		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(
+			cancelCtx,
+			cancelFunc,
+			toReactor,
+			toConnection),
+		Data: data,
+	}
+}
+
+var _ = stream.Register(
+	ReferenceDataTickerNewsTypeCode,
+	stream.TypeCodeData{
+		CreateMessage: func() proto.Message {
+			return &ReferenceDataTickerNews{}
+		},
+		CreateWrapper: func(
+			cancelCtx context.Context,
+			cancelFunc context.CancelFunc,
+			toReactor goprotoextra.ToReactorFunc,
+			toConnection goprotoextra.ToConnectionFunc,
+			data proto.Message) (goprotoextra.IMessageWrapper, error) {
+			if msg, ok := data.(*ReferenceDataTickerNews); ok {
+				return NewReferenceDataTickerNewsWrapper(
+					cancelCtx,
+					cancelFunc,
+					toReactor,
+					toConnection,
+					msg), nil
+			}
+			return nil, goerrors.InvalidParam
+		}})
+
+//true
+//true
+//false
+//false
+type ReferenceDataTickerNewsResponseWrapper struct {
+	goprotoextra.BaseMessageWrapper
+	Data *ReferenceDataTickerNewsResponse
+}
+
+func (self *ReferenceDataTickerNewsResponseWrapper) Message() interface{} {
+	return self.Data
+}
+
+func (self *ReferenceDataTickerNewsResponseWrapper) messageWrapper() interface{} {
+	return self
+}
+
+func NewReferenceDataTickerNewsResponseWrapper(
+	cancelCtx context.Context,
+	cancelFunc context.CancelFunc,
+	toReactor goprotoextra.ToReactorFunc,
+	toConnection goprotoextra.ToConnectionFunc,
+	data *ReferenceDataTickerNewsResponse) *ReferenceDataTickerNewsResponseWrapper {
+	return &ReferenceDataTickerNewsResponseWrapper{
+		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(
+			cancelCtx,
+			cancelFunc,
+			toReactor,
+			toConnection),
+		Data: data,
+	}
+}
+
+var _ = stream.Register(
+	ReferenceDataTickerNewsResponseTypeCode,
+	stream.TypeCodeData{
+		CreateMessage: func() proto.Message {
+			return &ReferenceDataTickerNewsResponse{}
+		},
+		CreateWrapper: func(
+			cancelCtx context.Context,
+			cancelFunc context.CancelFunc,
+			toReactor goprotoextra.ToReactorFunc,
+			toConnection goprotoextra.ToConnectionFunc,
+			data proto.Message) (goprotoextra.IMessageWrapper, error) {
+			if msg, ok := data.(*ReferenceDataTickerNewsResponse); ok {
+				return NewReferenceDataTickerNewsResponseWrapper(
 					cancelCtx,
 					cancelFunc,
 					toReactor,
