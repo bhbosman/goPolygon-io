@@ -2,6 +2,7 @@ package internal
 
 import (
 	"github.com/bhbosman/goPolygon-io/internal/wsCurrencyDialer"
+	"github.com/bhbosman/gocommon/Services/implementations"
 	"github.com/bhbosman/gocommon/app"
 	"github.com/bhbosman/gocommon/logSettings"
 	"github.com/bhbosman/gocomms/connectionManager"
@@ -39,6 +40,8 @@ func NewApp(setting ...IAppSettings) *App {
 		provide.RegisterHttpHandler("http://127.0.0.1:8084"),
 		endpoints.RegisterConnectionManagerEndpoint(),
 		view.RegisterConnectionsHtmlTemplate(),
+		implementations.ProvideNewUniqueReferenceService(),
+		implementations.ProvideUniqueSessionNumber(),
 
 		fx.Populate(&shutDowner),
 		//fx.Populate(&dd),
