@@ -7,15 +7,13 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxtest"
-	"net/http"
 	"testing"
 )
 
-func TestName(t *testing.T) {
+func TestTickersService(t *testing.T) {
 
 	targets := struct {
 		fx.In
-		Client  *http.Client                   `name:"Polygon"`
 		Tickers *TickersService.TickersService `name:"Polygon"`
 	}{}
 
@@ -29,23 +27,25 @@ func TestName(t *testing.T) {
 	assert.NoError(t, app.Err())
 	app.RequireStart()
 	defer app.StartTimeout()
-
-	tickersResponse, err := targets.Tickers.Tickers(
-		TickersService.TickersOptionActive(true),
-		TickersService.TickersOptionLimit(1000),
-		TickersService.TickersOptionMarket("fx"),
-		//TickersService.TickerOptionTicker("AAPL"),
-	)
-	assert.NoError(t, err)
-	assert.NotNil(t, tickersResponse)
-	for {
-		for _, result := range tickersResponse.Results {
-			println(result.String())
-
-		}
-		if tickersResponse.NextUrl == "" {
-			break
-		}
-		tickersResponse, err = targets.Tickers.TickersNext(tickersResponse.NextUrl)
-	}
+	t.Run("Ask For Apple", func(t *testing.T) {
+		tickersResponse, err := targets.Tickers.Tickers(
+			TickersService.TickersOptionActive(true),
+			TickersService.TickersOptionTicker("AAPL"),
+		)
+		assert.NoError(t, err)
+		assert.NotNil(t, tickersResponse)
+		assert.Len(t, tickersResponse.Results, 1)
+		assert.Equal(t, "AAPL", tickersResponse.Results[0].Ticker)
+		assert.Equal(t, "CS", tickersResponse.Results[0].Type)
+	})
+	t.Run("Ask For Fx", func(t *testing.T) {
+		tickersResponse, err := targets.Tickers.Tickers(
+			TickersService.TickersOptionActive(true),
+			TickersService.TickersOptionLimit(100),
+			TickersService.TickersOptionMarket("fx"),
+		)
+		assert.NoError(t, err)
+		assert.NotNil(t, tickersResponse)
+		assert.Len(t, tickersResponse.Results, 100)
+	})
 }
