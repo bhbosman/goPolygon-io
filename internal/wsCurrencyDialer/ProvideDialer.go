@@ -2,6 +2,7 @@ package wsCurrencyDialer
 
 import (
 	"fmt"
+	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	"github.com/bhbosman/gocomms/impl"
 	"github.com/bhbosman/gocomms/intf"
 	"github.com/bhbosman/gocomms/netDial"
@@ -23,15 +24,17 @@ func ProvideDialer(options ...IDialerSetting) fx.Option {
 				Group: "CFR",
 				Target: func(params struct {
 					fx.In
-					ApiKey                            string `name:"Polygon-io.API.Key"`
-					FxCurrencyRegistration            string `name:"Polygon-io.WS.FX.Registration.C"`
-					FxCurrencyAggregationRegistration string `name:"Polygon-io.WS.FX.Registration.CA"`
+					TickersService                    TickersService.ITickersService `name:"Polygon"`
+					ApiKey                            string                         `name:"Polygon-io.API.Key"`
+					FxCurrencyRegistration            string                         `name:"Polygon-io.WS.FX.Registration.C"`
+					FxCurrencyAggregationRegistration string                         `name:"Polygon-io.WS.FX.Registration.CA"`
 				}) (intf.IConnectionReactorFactory, error) {
 					return NewConnectionReactorFactory(
 						crfName,
 						params.ApiKey,
 						params.FxCurrencyRegistration,
-						params.FxCurrencyAggregationRegistration), nil
+						params.FxCurrencyAggregationRegistration,
+						params.TickersService), nil
 				},
 			}),
 		fx.Provide(

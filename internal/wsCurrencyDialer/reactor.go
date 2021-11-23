@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	stream2 "github.com/bhbosman/goPolygon-io/internal/stream"
 	"github.com/bhbosman/gocommon/messageRouter"
 	"github.com/bhbosman/gocommon/stream"
@@ -19,6 +20,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	"go.uber.org/zap"
 	"net/url"
+	"sort"
 )
 
 type reactor struct {
@@ -28,6 +30,7 @@ type reactor struct {
 	apiKey                    string
 	fxRegistration            string
 	fxAggregationRegistration string
+	tickersService            TickersService.ITickersService
 }
 
 func (self *reactor) Close() error {
@@ -65,6 +68,10 @@ func (self *reactor) HandleReaderWriter(msg *gomessageblock.ReaderWriter) error 
 	_, err = self.messageRouter.Route(marshal)
 	return err
 }
+func (self *reactor) HandleTickerServiceResponse(msg *tickerServiceResponse) error {
+	return nil
+}
+
 func (self *reactor) HandlePolygonMessageResponse(msg *stream2.PolygonMessageResponse) error {
 	switch msg.Ev {
 	case "status":
@@ -168,6 +175,43 @@ func (self *reactor) dealWithStatus(msg *stream2.PolygonMessageResponse) {
 		break
 	case "auth_success":
 		self.Logger.Info("Receive Auth success message", zap.String("Message", msg.Message))
+		go func() {
+			currenciesMap := make(map[string]string)
+			var list []string
+			tickers, err := self.tickersService.Tickers(
+				TickersService.TickersOptionActive(true),
+				TickersService.TickersOptionMarket("fx"))
+			for {
+				if err != nil {
+					return
+				}
+				for _, ticker := range tickers.Results {
+					list = append(list, ticker.Ticker)
+					curr := ticker.Ticker[2:5]
+					if _, ok := currenciesMap[curr]; !ok {
+						currenciesMap[curr] = curr
+					}
+				}
+				if tickers.NextUrl == "" {
+					break
+				}
+				tickers, err = self.tickersService.TickersNext(tickers.NextUrl)
+			}
+			var currencyArray []string
+			for key, _ := range currenciesMap {
+				currencyArray = append(currencyArray, key)
+			}
+			sort.Strings(currencyArray)
+			var currencyMatrix [][]float64
+			for i := 0; i < len(currencyArray); i++ {
+				dd := make([]float64, len(currencyArray))
+				currencyMatrix = append(currencyMatrix, dd)
+			}
+			err = self.ToReactor(false, newTickerServiceResponse(list))
+			if err != nil {
+				return
+			}
+		}()
 		self.subscribeFx()
 		self.subscribeFxAggregates()
 		break
@@ -221,7 +265,8 @@ func NewConnectionReactor(
 	fxRegistration string,
 	fxAggregationRegistration string,
 
-	userContext interface{}) *reactor {
+	userContext interface{},
+	tickersService TickersService.ITickersService) *reactor {
 	result := &reactor{
 		BaseConnectionReactor: impl.NewBaseConnectionReactor(
 			logger, cancelCtx, cancelFunc, connectionCancelFunc, userContext),
@@ -230,9 +275,19 @@ func NewConnectionReactor(
 		apiKey:                    apiKey,
 		fxRegistration:            fxRegistration,
 		fxAggregationRegistration: fxAggregationRegistration,
+		tickersService:            tickersService,
 	}
 	_ = result.messageRouter.Add(result.HandleReaderWriter)
 	_ = result.messageRouter.Add(result.HandleWebSocketMessageWrapper)
 	_ = result.messageRouter.Add(result.HandlePolygonMessageResponse)
+	_ = result.messageRouter.Add(result.HandleTickerServiceResponse)
 	return result
+}
+
+type tickerServiceResponse struct {
+	s []string
+}
+
+func newTickerServiceResponse(s []string) *tickerServiceResponse {
+	return &tickerServiceResponse{s: s}
 }

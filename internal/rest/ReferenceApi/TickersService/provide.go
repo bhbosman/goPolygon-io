@@ -13,8 +13,9 @@ func Provide() fx.Option {
 				Target: func(params struct {
 					fx.In
 					Client *http.Client `name:"Polygon"`
-				}) (*TickersService, error) {
-					return NewTickers(params.Client), nil
+				}) (*TickersService, ITickersService, error) {
+					result := NewTickers(params.Client)
+					return result, result, nil
 				},
 			},
 		),

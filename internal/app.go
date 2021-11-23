@@ -1,6 +1,8 @@
 package internal
 
 import (
+	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
+	"github.com/bhbosman/goPolygon-io/internal/rest/http"
 	"github.com/bhbosman/goPolygon-io/internal/wsCurrencyDialer"
 	"github.com/bhbosman/gocommon/Services/implementations"
 	"github.com/bhbosman/gocommon/app"
@@ -42,6 +44,8 @@ func NewApp(setting ...IAppSettings) *App {
 		view.RegisterConnectionsHtmlTemplate(),
 		implementations.ProvideNewUniqueReferenceService(),
 		implementations.ProvideUniqueSessionNumber(),
+		TickersService.Provide(),
+		http.Provide(),
 
 		fx.Populate(&shutDowner),
 		//fx.Populate(&dd),

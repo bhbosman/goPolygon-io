@@ -2,6 +2,7 @@ package wsCurrencyDialer
 
 import (
 	"context"
+	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	"github.com/bhbosman/gocomms/common"
 	"github.com/bhbosman/gocomms/intf"
 	"go.uber.org/zap"
@@ -12,18 +13,21 @@ type factory struct {
 	apiKey                    string
 	fxRegistration            string
 	fxAggregationRegistration string
+	tickersService            TickersService.ITickersService
 }
 
 func NewConnectionReactorFactory(
 	crfName string,
 	apiKey string,
 	fxRegistration string,
-	fxAggregationRegistration string) *factory {
+	fxAggregationRegistration string,
+	TickersService TickersService.ITickersService) *factory {
 	return &factory{
 		crfName:                   crfName,
 		apiKey:                    apiKey,
 		fxRegistration:            fxRegistration,
 		fxAggregationRegistration: fxAggregationRegistration,
+		tickersService:            TickersService,
 	}
 }
 
@@ -41,7 +45,8 @@ func (self *factory) Create(
 		self.apiKey,
 		self.fxRegistration,
 		self.fxAggregationRegistration,
-		userContext)
+		userContext,
+		self.tickersService)
 	return result
 }
 
