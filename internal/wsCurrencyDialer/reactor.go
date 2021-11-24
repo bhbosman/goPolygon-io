@@ -214,8 +214,6 @@ func (self *reactor) dealWithStatus(msg *stream2.PolygonMessageResponse) {
 }
 
 func (self *reactor) dealWithFxPrice(msg stream2.IPolygonFxPrice) {
-	//println(msg.(fmt.Stringer).String())
-	//print("=")
 }
 
 func (self *reactor) dealWithFxAggr(stream2.IPolygonFxAggregate) {
