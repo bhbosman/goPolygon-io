@@ -70,10 +70,12 @@ func (self *reactor) HandleReaderWriter(msg *gomessageblock.ReaderWriter) error 
 }
 func (self *reactor) HandleTickerServiceResponse(msg *tickerServiceResponse) error {
 	var l []string
-	for _, s := range msg.s {
-		currency := s[2:8]
-		l = append(l, currency)
-	}
+	//for _, s := range msg.s {
+	//	currency := s[2:8]
+	//	l = append(l, currency)
+	//}
+	l = append(l, "USDZAR")
+	//l = append(l, "ZARUSD")
 
 	self.subscribeFx(l)
 	self.subscribeFxAggregates(l)
@@ -233,6 +235,7 @@ func (self *reactor) subscribeFx(list []string) {
 	msg := &stream2.PolygonMessageRequest{
 		Action: "subscribe",
 		Params: strings.Join(l, ","),
+		//Params:"C.*",
 	}
 	err := self.sendMessage(msg)
 	if err != nil {
@@ -251,6 +254,7 @@ func (self *reactor) subscribeFxAggregates(list []string) {
 	msg := &stream2.PolygonMessageRequest{
 		Action: "subscribe",
 		Params: strings.Join(l, ","),
+		//Params:"CA.*",
 	}
 	err := self.sendMessage(msg)
 	if err != nil {
