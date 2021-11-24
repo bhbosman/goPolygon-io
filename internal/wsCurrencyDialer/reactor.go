@@ -20,7 +20,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	"go.uber.org/zap"
 	"net/url"
-	"sort"
+	"strings"
 )
 
 type reactor struct {
@@ -69,6 +69,14 @@ func (self *reactor) HandleReaderWriter(msg *gomessageblock.ReaderWriter) error 
 	return err
 }
 func (self *reactor) HandleTickerServiceResponse(msg *tickerServiceResponse) error {
+	var l []string
+	for _, s := range msg.s {
+		currency := s[2:8]
+		l = append(l, currency)
+	}
+
+	self.subscribeFx(l)
+	self.subscribeFxAggregates(l)
 	return nil
 }
 
@@ -176,7 +184,6 @@ func (self *reactor) dealWithStatus(msg *stream2.PolygonMessageResponse) {
 	case "auth_success":
 		self.Logger.Info("Receive Auth success message", zap.String("Message", msg.Message))
 		go func() {
-			currenciesMap := make(map[string]string)
 			var list []string
 			tickers, err := self.tickersService.Tickers(
 				TickersService.TickersOptionActive(true),
@@ -187,33 +194,17 @@ func (self *reactor) dealWithStatus(msg *stream2.PolygonMessageResponse) {
 				}
 				for _, ticker := range tickers.Results {
 					list = append(list, ticker.Ticker)
-					curr := ticker.Ticker[2:5]
-					if _, ok := currenciesMap[curr]; !ok {
-						currenciesMap[curr] = curr
-					}
 				}
 				if tickers.NextUrl == "" {
 					break
 				}
 				tickers, err = self.tickersService.TickersNext(tickers.NextUrl)
 			}
-			var currencyArray []string
-			for key, _ := range currenciesMap {
-				currencyArray = append(currencyArray, key)
-			}
-			sort.Strings(currencyArray)
-			var currencyMatrix [][]float64
-			for i := 0; i < len(currencyArray); i++ {
-				dd := make([]float64, len(currencyArray))
-				currencyMatrix = append(currencyMatrix, dd)
-			}
 			err = self.ToReactor(false, newTickerServiceResponse(list))
 			if err != nil {
 				return
 			}
 		}()
-		self.subscribeFx()
-		self.subscribeFxAggregates()
 		break
 	case "success":
 		self.Logger.Info("Receive success message", zap.String("Message", msg.Message))
@@ -224,7 +215,7 @@ func (self *reactor) dealWithStatus(msg *stream2.PolygonMessageResponse) {
 
 func (self *reactor) dealWithFxPrice(msg stream2.IPolygonFxPrice) {
 	//println(msg.(fmt.Stringer).String())
-	//print("=")
+	print("=")
 }
 
 func (self *reactor) dealWithFxAggr(stream2.IPolygonFxAggregate) {
@@ -232,10 +223,16 @@ func (self *reactor) dealWithFxAggr(stream2.IPolygonFxAggregate) {
 
 }
 
-func (self *reactor) subscribeFx() {
+func (self *reactor) subscribeFx(list []string) {
+	var l []string
+	for _, curr := range list {
+		l = append(l, fmt.Sprintf("C.%v", curr))
+	}
+
+	strings.Join(l, ",")
 	msg := &stream2.PolygonMessageRequest{
 		Action: "subscribe",
-		Params: "C.*",
+		Params: strings.Join(l, ","),
 	}
 	err := self.sendMessage(msg)
 	if err != nil {
@@ -244,10 +241,16 @@ func (self *reactor) subscribeFx() {
 	}
 }
 
-func (self *reactor) subscribeFxAggregates() {
+func (self *reactor) subscribeFxAggregates(list []string) {
+	var l []string
+	for _, curr := range list {
+		l = append(l, fmt.Sprintf("CA.%v", curr))
+	}
+
+	strings.Join(l, ",")
 	msg := &stream2.PolygonMessageRequest{
 		Action: "subscribe",
-		Params: "CA.*",
+		Params: strings.Join(l, ","),
 	}
 	err := self.sendMessage(msg)
 	if err != nil {
