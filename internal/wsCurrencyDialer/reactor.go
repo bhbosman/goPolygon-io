@@ -60,7 +60,7 @@ func (self *reactor) doNext(_ bool, i interface{}) {
 	}
 }
 
-func (self *reactor) HandleReaderWriter(msg *gomessageblock.ReaderWriter) error {
+func (self *reactor) handleReaderWriter(msg *gomessageblock.ReaderWriter) error {
 	marshal, err := stream.UnMarshal(msg, self.CancelCtx, self.CancelFunc, self.ToReactor, self.ToConnection)
 	if err != nil {
 		return err
@@ -68,19 +68,20 @@ func (self *reactor) HandleReaderWriter(msg *gomessageblock.ReaderWriter) error 
 	_, err = self.messageRouter.Route(marshal)
 	return err
 }
-func (self *reactor) HandleTickerServiceResponse(msg *tickerServiceResponse) error {
-	var l []string
+func (self *reactor) handleTickerServiceResponse(msg *tickerServiceResponse) error {
+	var currencyList []string
 	for _, s := range msg.s {
 		currency := fmt.Sprintf("%v/%v", s[2:5], s[5:8])
-		l = append(l, currency)
+		currencyList = append(currencyList, currency)
 	}
 
-	self.subscribeFx(l)
-	self.subscribeFxAggregates(l)
+	self.subscribeFx(currencyList)
+	self.subscribeFxAggregates(currencyList)
+
 	return nil
 }
 
-func (self *reactor) HandlePolygonMessageResponse(msg *stream2.PolygonMessageResponse) error {
+func (self *reactor) handlePolygonMessageResponse(msg *stream2.PolygonMessageResponse) error {
 	switch msg.Ev {
 	case "status":
 		self.dealWithStatus(msg)
@@ -98,7 +99,7 @@ func (self *reactor) HandlePolygonMessageResponse(msg *stream2.PolygonMessageRes
 	return nil
 }
 
-func (self *reactor) HandleWebSocketMessageWrapper(msg *wsmsg.WebSocketMessageWrapper) error {
+func (self *reactor) handleWebSocketMessageWrapper(msg *wsmsg.WebSocketMessageWrapper) error {
 	switch msg.Data.OpCode {
 	case wsmsg.WebSocketMessage_OpText:
 		if len(msg.Data.Message) > 0 && msg.Data.Message[0] == '[' { //type WebsocketDataResponse []interface{}
@@ -276,10 +277,11 @@ func NewConnectionReactor(
 		fxAggregationRegistration: fxAggregationRegistration,
 		tickersService:            tickersService,
 	}
-	_ = result.messageRouter.Add(result.HandleReaderWriter)
-	_ = result.messageRouter.Add(result.HandleWebSocketMessageWrapper)
-	_ = result.messageRouter.Add(result.HandlePolygonMessageResponse)
-	_ = result.messageRouter.Add(result.HandleTickerServiceResponse)
+	_ = result.messageRouter.Add(result.handleReaderWriter)
+	_ = result.messageRouter.Add(result.handleWebSocketMessageWrapper)
+	_ = result.messageRouter.Add(result.handlePolygonMessageResponse)
+	_ = result.messageRouter.Add(result.handleTickerServiceResponse)
+
 	return result
 }
 
