@@ -10,7 +10,8 @@ import (
 	"github.com/bhbosman/gocommon/messageRouter"
 	"github.com/bhbosman/gocommon/stream"
 	common3 "github.com/bhbosman/gocomms/common"
-	"github.com/bhbosman/gocomms/connectionManager"
+	"github.com/bhbosman/gocomms/connectionManager/CMIntf"
+
 	"github.com/bhbosman/gocomms/impl"
 	"github.com/bhbosman/gocomms/intf"
 	"github.com/bhbosman/gocomms/stacks/websocket/wsmsg"
@@ -41,7 +42,7 @@ func (self *reactor) Close() error {
 func (self *reactor) Init(
 	url *url.URL,
 	connectionId string,
-	connectionManager connectionManager.IConnectionManager__,
+	connectionManager CMIntf.IConnectionManagerService,
 	onSend goprotoextra.ToConnectionFunc,
 	toConnectionReactor goprotoextra.ToReactorFunc) (intf.NextExternalFunc, error) {
 	_, _ = self.BaseConnectionReactor.Init(url, connectionId, connectionManager, onSend, toConnectionReactor)
