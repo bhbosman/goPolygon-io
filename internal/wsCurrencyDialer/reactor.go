@@ -8,8 +8,8 @@ import (
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	stream2 "github.com/bhbosman/goPolygon-io/internal/stream"
 	"github.com/bhbosman/gocommon/messageRouter"
+	common3 "github.com/bhbosman/gocommon/model"
 	"github.com/bhbosman/gocommon/stream"
-	common3 "github.com/bhbosman/gocomms/common"
 	"github.com/bhbosman/gocomms/connectionManager/CMIntf"
 
 	"github.com/bhbosman/gocomms/impl"
@@ -215,10 +215,10 @@ func (self *reactor) dealWithStatus(msg *stream2.PolygonMessageResponse) {
 	}
 }
 
-func (self *reactor) dealWithFxPrice(msg stream2.IPolygonFxPrice) {
+func (self *reactor) dealWithFxPrice(_ stream2.IPolygonFxPrice) {
 }
 
-func (self *reactor) dealWithFxAggr(stream2.IPolygonFxAggregate) {
+func (self *reactor) dealWithFxAggr(_ stream2.IPolygonFxAggregate) {
 }
 
 func (self *reactor) subscribeFx(list []string) {

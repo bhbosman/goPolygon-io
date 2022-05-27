@@ -3,7 +3,7 @@ package wsCurrencyDialer
 import (
 	"context"
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
-	"github.com/bhbosman/gocomms/common"
+	"github.com/bhbosman/gocommon/model"
 	"github.com/bhbosman/gocomms/intf"
 	"go.uber.org/zap"
 )
@@ -34,7 +34,7 @@ func NewConnectionReactorFactory(
 func (self *factory) Create(
 	cancelCtx context.Context,
 	cancelFunc context.CancelFunc,
-	connectionCancelFunc common.ConnectionCancelFunc,
+	connectionCancelFunc model.ConnectionCancelFunc,
 	logger *zap.Logger,
 	userContext interface{}) intf.IConnectionReactor {
 	result := NewConnectionReactor(

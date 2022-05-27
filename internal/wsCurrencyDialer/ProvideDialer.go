@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	"github.com/bhbosman/gocommon/messages"
-	"github.com/bhbosman/gocomms/common"
+	"github.com/bhbosman/gocommon/model"
 	"github.com/bhbosman/gocomms/impl"
 	"github.com/bhbosman/gocomms/intf"
 	"github.com/bhbosman/gocomms/netDial"
@@ -33,9 +33,9 @@ func ProvideDialer(options ...IDialerSetting) fx.Option {
 			}) messages.CreateAppCallback {
 				fxOptions := fx.Options(
 					fx.Provide(fx.Annotated{Name: "Polygon", Target: func() TickersService.ITickersService { return params.TickersService }}),
-					fx.Provide(fx.Annotated{Name: "Polygon-io.API.Key", Target: common.CreateStringContext(params.ApiKey)}),
-					fx.Provide(fx.Annotated{Name: "Polygon-io.WS.FX.Registration.C", Target: common.CreateStringContext(params.FxCurrencyAggregationRegistration)}),
-					fx.Provide(fx.Annotated{Name: "Polygon-io.WS.FX.Registration.CA", Target: common.CreateStringContext(params.FxCurrencyAggregationRegistration)}),
+					fx.Provide(fx.Annotated{Name: "Polygon-io.API.Key", Target: model.CreateStringContext(params.ApiKey)}),
+					fx.Provide(fx.Annotated{Name: "Polygon-io.WS.FX.Registration.C", Target: model.CreateStringContext(params.FxCurrencyAggregationRegistration)}),
+					fx.Provide(fx.Annotated{Name: "Polygon-io.WS.FX.Registration.CA", Target: model.CreateStringContext(params.FxCurrencyAggregationRegistration)}),
 					fx.Provide(
 						fx.Annotated{
 							Target: func(params struct {

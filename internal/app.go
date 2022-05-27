@@ -4,6 +4,7 @@ import (
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	"github.com/bhbosman/goPolygon-io/internal/rest/http"
 	"github.com/bhbosman/goPolygon-io/internal/wsCurrencyDialer"
+	"github.com/bhbosman/gocommon/FxWrappers"
 	"github.com/bhbosman/gocommon/Providers"
 	"github.com/bhbosman/gocomms/connectionManager/CMImpl"
 	"github.com/bhbosman/gocomms/connectionManager/endpoints"
@@ -30,8 +31,9 @@ func NewApp(setting ...IAppSettings) *App {
 	ConsumerCounter := netDial.NewCanDialDefaultImpl()
 	//var dd *gocommon.RunTimeManager
 
-	fxApp := Providers.NewFxAppWithServices(
+	fxApp := FxWrappers.NewFxMainApplicationServices(
 		"PolygonIo",
+		false,
 		ProvidePolygonKeys(),
 		Providers.RegisterRunTimeManager(),
 
