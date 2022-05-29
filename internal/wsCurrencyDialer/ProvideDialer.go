@@ -5,13 +5,16 @@ import (
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	"github.com/bhbosman/gocommon/messages"
 	"github.com/bhbosman/gocommon/model"
-	"github.com/bhbosman/gocomms/impl"
+	"github.com/bhbosman/gocomms/common"
 	"github.com/bhbosman/gocomms/intf"
 	"github.com/bhbosman/gocomms/netDial"
 	"go.uber.org/fx"
 )
 
-func ProvideDialer(options ...IDialerSetting) fx.Option {
+func ProvideDialer(
+	serviceIdentifier model.ServiceIdentifier_,
+	serviceDependentOn model.ServiceIdentifier_,
+	options ...IDialerSetting) fx.Option {
 	settings := &DialerSettings{}
 	for _, option := range options {
 		if option == nil {
@@ -29,7 +32,7 @@ func ProvideDialer(options ...IDialerSetting) fx.Option {
 				ApiKey                            string                         `name:"Polygon-io.API.Key"`
 				FxCurrencyRegistration            string                         `name:"Polygon-io.WS.FX.Registration.C"`
 				FxCurrencyAggregationRegistration string                         `name:"Polygon-io.WS.FX.Registration.CA"`
-				NetAppFuncInParams                impl.NetAppFuncInParams
+				NetAppFuncInParams                common.NetAppFuncInParams
 			}) messages.CreateAppCallback {
 				fxOptions := fx.Options(
 					fx.Provide(fx.Annotated{Name: "Polygon", Target: func() TickersService.ITickersService { return params.TickersService }}),
@@ -55,14 +58,18 @@ func ProvideDialer(options ...IDialerSetting) fx.Option {
 								}
 							},
 						}))
-				return netDial.NewNetDialAppNoCrfName(
-					fxOptions,
+				f := netDial.NewNetDialApp(
+					fmt.Sprintf("goPolygon-io Dialer"), serviceIdentifier, serviceDependentOn, fxOptions,
 					fmt.Sprintf("goPolygon-io Dialer"),
 					fmt.Sprintf("wss://socket.polygon.io:443/forex"),
-					impl.WebSocketName,
+					common.WebSocketName,
+					func() (intf.IConnectionReactorFactory, error) {
+						return nil, fmt.Errorf("asdffdf")
+					},
 					netDial.MaxConnectionsSetting(1),
 					//netDial.UserContextValue(option),
-					netDial.CanDial(settings.canDial...))(params.NetAppFuncInParams)
+					netDial.CanDial(settings.canDial...))
+				return f(params.NetAppFuncInParams)
 			},
 		})
 }

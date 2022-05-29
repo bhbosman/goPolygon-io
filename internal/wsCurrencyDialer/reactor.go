@@ -7,14 +7,13 @@ import (
 	"fmt"
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	stream2 "github.com/bhbosman/goPolygon-io/internal/stream"
+	"github.com/bhbosman/gocommon/Services/IConnectionManager"
 	"github.com/bhbosman/gocommon/messageRouter"
 	common3 "github.com/bhbosman/gocommon/model"
 	"github.com/bhbosman/gocommon/stream"
-	"github.com/bhbosman/gocomms/connectionManager/CMIntf"
-
-	"github.com/bhbosman/gocomms/impl"
+	"github.com/bhbosman/gocomms/common"
+	"github.com/bhbosman/gocomms/common/webSocketMessages/wsmsg"
 	"github.com/bhbosman/gocomms/intf"
-	"github.com/bhbosman/gocomms/stacks/websocket/wsmsg"
 	"github.com/bhbosman/gomessageblock"
 	"github.com/bhbosman/goprotoextra"
 	"github.com/golang/protobuf/jsonpb"
@@ -25,7 +24,7 @@ import (
 )
 
 type reactor struct {
-	impl.BaseConnectionReactor
+	common.BaseConnectionReactor
 	messageRouter             *messageRouter.MessageRouter
 	connectionStatus          string
 	apiKey                    string
@@ -42,7 +41,7 @@ func (self *reactor) Close() error {
 func (self *reactor) Init(
 	url *url.URL,
 	connectionId string,
-	connectionManager CMIntf.IConnectionManagerService,
+	connectionManager IConnectionManager.IService,
 	onSend goprotoextra.ToConnectionFunc,
 	toConnectionReactor goprotoextra.ToReactorFunc) (intf.NextExternalFunc, error) {
 	_, _ = self.BaseConnectionReactor.Init(url, connectionId, connectionManager, onSend, toConnectionReactor)
@@ -269,7 +268,7 @@ func NewConnectionReactor(
 	userContext interface{},
 	tickersService TickersService.ITickersService) *reactor {
 	result := &reactor{
-		BaseConnectionReactor: impl.NewBaseConnectionReactor(
+		BaseConnectionReactor: common.NewBaseConnectionReactor(
 			logger, cancelCtx, cancelFunc, connectionCancelFunc, userContext),
 		messageRouter:             messageRouter.NewMessageRouter(),
 		connectionStatus:          "",

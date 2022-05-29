@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/bhbosman/goPolygon-io/internal"
-	"time"
 )
 
 func main() {
@@ -12,8 +11,6 @@ func main() {
 		println(app.FxApp.Err().Error())
 		return
 	}
-	app.FxApp.Run()
-	// allow shutdown to complete
-	time.Sleep(time.Second)
+	app.RunTerminalApp()
 
 }

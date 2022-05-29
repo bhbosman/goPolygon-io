@@ -6,7 +6,6 @@ import (
 	"github.com/bhbosman/goPolygon-io/internal/wsCurrencyDialer"
 	"github.com/bhbosman/gocommon/FxWrappers"
 	"github.com/bhbosman/gocommon/Providers"
-	"github.com/bhbosman/gocomms/connectionManager/CMImpl"
 	"github.com/bhbosman/gocomms/connectionManager/endpoints"
 	"github.com/bhbosman/gocomms/connectionManager/view"
 	"github.com/bhbosman/gocomms/netDial"
@@ -18,7 +17,8 @@ type App struct {
 	ShutDowner fx.Shutdowner
 }
 
-func NewApp(setting ...IAppSettings) *App {
+func NewApp(
+	setting ...IAppSettings) *FxWrappers.TerminalAppUsingFxApp {
 	settingInstance := &settings{}
 	for _, s := range setting {
 		if s == nil {
@@ -37,8 +37,10 @@ func NewApp(setting ...IAppSettings) *App {
 		ProvidePolygonKeys(),
 		Providers.RegisterRunTimeManager(),
 
-		CMImpl.RegisterDefaultConnectionManager(),
-		wsCurrencyDialer.ProvideDialer(wsCurrencyDialer.MaxConnections(1), wsCurrencyDialer.CanDial(ConsumerCounter)),
+		wsCurrencyDialer.ProvideDialer(
+			0,
+			0,
+			wsCurrencyDialer.MaxConnections(1), wsCurrencyDialer.CanDial(ConsumerCounter)),
 		endpoints.RegisterConnectionManagerEndpoint(),
 		view.RegisterConnectionsHtmlTemplate(),
 		TickersService.Provide(),
@@ -46,8 +48,5 @@ func NewApp(setting ...IAppSettings) *App {
 
 		fx.Populate(&shutDowner),
 	)
-	return &App{
-		FxApp:      fxApp,
-		ShutDowner: shutDowner,
-	}
+	return fxApp
 }
