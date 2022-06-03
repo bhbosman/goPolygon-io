@@ -63,9 +63,7 @@ func ProvideDialer(
 					fmt.Sprintf("goPolygon-io Dialer"),
 					fmt.Sprintf("wss://socket.polygon.io:443/forex"),
 					common.WebSocketName,
-					func() (intf.IConnectionReactorFactory, error) {
-						return nil, fmt.Errorf("asdffdf")
-					},
+					nil,
 					netDial.MaxConnectionsSetting(1),
 					//netDial.UserContextValue(option),
 					netDial.CanDial(settings.canDial...))
