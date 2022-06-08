@@ -12,8 +12,8 @@ import (
 )
 
 func ProvideDialer(
-	serviceIdentifier model.ServiceIdentifier_,
-	serviceDependentOn model.ServiceIdentifier_,
+	serviceIdentifier model.ServiceIdentifier,
+	serviceDependentOn model.ServiceIdentifier,
 	options ...IDialerSetting) fx.Option {
 	settings := &DialerSettings{}
 	for _, option := range options {
