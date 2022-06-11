@@ -2,6 +2,7 @@ package wsCurrencyDialer
 
 import (
 	"fmt"
+	"github.com/bhbosman/goCommsNetDialer"
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	"github.com/bhbosman/gocommon/messages"
 	"github.com/bhbosman/gocommon/model"
@@ -34,7 +35,7 @@ func ProvideDialer(
 				FxCurrencyAggregationRegistration string                         `name:"Polygon-io.WS.FX.Registration.CA"`
 				NetAppFuncInParams                common.NetAppFuncInParams
 			}) messages.CreateAppCallback {
-				f := netDial.NewNetDialApp(
+				f := goCommsNetDialer.NewNetDialApp(
 					fmt.Sprintf("goPolygon-io Dialer"),
 					serviceIdentifier,
 					serviceDependentOn,
@@ -51,7 +52,7 @@ func ProvideDialer(
 					},
 					netDial.MaxConnectionsSetting(1),
 					//netDial.UserContextValue(option),
-					netDial.CanDial(settings.canDial...))
+					goCommsNetDialer.CanDial(settings.canDial...))
 				return f(params.NetAppFuncInParams)
 			},
 		})

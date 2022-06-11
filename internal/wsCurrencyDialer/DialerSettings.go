@@ -1,8 +1,10 @@
 package wsCurrencyDialer
 
-import "github.com/bhbosman/gocomms/netDial"
+import (
+	"github.com/bhbosman/goCommsNetDialer"
+)
 
 type DialerSettings struct {
-	canDial        []netDial.ICanDial
+	canDial        []goCommsNetDialer.ICanDial
 	maxConnections int
 }

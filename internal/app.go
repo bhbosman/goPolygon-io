@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"github.com/bhbosman/goCommsNetDialer"
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	"github.com/bhbosman/goPolygon-io/internal/rest/http"
 	"github.com/bhbosman/goPolygon-io/internal/wsCurrencyDialer"
@@ -8,7 +9,6 @@ import (
 	"github.com/bhbosman/gocommon/Providers"
 	"github.com/bhbosman/gocomms/connectionManager/endpoints"
 	"github.com/bhbosman/gocomms/connectionManager/view"
-	"github.com/bhbosman/gocomms/netDial"
 	"go.uber.org/fx"
 )
 
@@ -28,7 +28,7 @@ func NewApp(
 	}
 
 	var shutDowner fx.Shutdowner
-	ConsumerCounter := netDial.NewCanDialDefaultImpl()
+	ConsumerCounter := goCommsNetDialer.NewCanDialDefaultImpl()
 	//var dd *gocommon.RunTimeManager
 
 	fxApp := FxWrappers.NewFxMainApplicationServices(
