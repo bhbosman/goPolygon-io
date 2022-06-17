@@ -1,6 +1,6 @@
 module github.com/bhbosman/goPolygon-io
 
-go 1.15
+go 1.18
 
 require (
 	github.com/bhbosman/goMessages v0.0.0-20210414134625-4d7166d206a6
