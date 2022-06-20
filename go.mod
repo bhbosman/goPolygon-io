@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/bhbosman/goMessages v0.0.0-20210414134625-4d7166d206a6
-	github.com/bhbosman/gocommon v0.0.0-20220602200451-0996b073614b
+	github.com/bhbosman/gocommon v0.0.0-20220620062839-d40b45675900
 	github.com/bhbosman/gocomms v0.0.0-20220527203916-c87f0e084175
 	github.com/bhbosman/goerrors v0.0.0-20210201065523-bb3e832fa9ab
 	github.com/bhbosman/gomessageblock v0.0.0-20210901070622-be36a3f8d303
