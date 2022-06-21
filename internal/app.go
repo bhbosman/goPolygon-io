@@ -2,10 +2,10 @@ package internal
 
 import (
 	"github.com/bhbosman/goCommsNetDialer"
+	"github.com/bhbosman/goFxApp/FxWrappers"
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	"github.com/bhbosman/goPolygon-io/internal/rest/http"
 	"github.com/bhbosman/goPolygon-io/internal/wsCurrencyDialer"
-	"github.com/bhbosman/gocommon/FxWrappers"
 	"github.com/bhbosman/gocommon/Providers"
 	"github.com/bhbosman/gocomms/connectionManager/endpoints"
 	"github.com/bhbosman/gocomms/connectionManager/view"
