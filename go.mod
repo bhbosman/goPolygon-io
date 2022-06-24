@@ -19,6 +19,7 @@ require (
 	go.uber.org/zap v1.21.0
 	google.golang.org/protobuf v1.25.0
 )
+replace github.com/gdamore/tcell/v2 => github.com/bhbosman/tcell/v2 v2.5.2-0.20220624055704-f9a9454fab5b
 
 replace github.com/bhbosman/goMessages => ../goMessages
 
