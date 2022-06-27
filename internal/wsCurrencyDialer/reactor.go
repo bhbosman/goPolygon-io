@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/bhbosman/goCommsStacks/webSocketMessages/wsmsg"
-	"github.com/bhbosman/goConnectionManager/IConnectionManager"
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	stream2 "github.com/bhbosman/goPolygon-io/internal/stream"
 	"github.com/bhbosman/gocommon/messageRouter"
