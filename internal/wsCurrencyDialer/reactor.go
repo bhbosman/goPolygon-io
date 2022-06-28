@@ -18,7 +18,6 @@ import (
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
 	"go.uber.org/zap"
-	"net/url"
 	"strings"
 )
 
@@ -38,12 +37,10 @@ func (self *reactor) Close() error {
 }
 
 func (self *reactor) Init(
-	url *url.URL,
-	connectionId string,
-	connectionManager IConnectionManager.IService,
 	onSend goprotoextra.ToConnectionFunc,
-	toConnectionReactor goprotoextra.ToReactorFunc) (intf.NextExternalFunc, error) {
-	_, _ = self.BaseConnectionReactor.Init(url, connectionId, connectionManager, onSend, toConnectionReactor)
+	toConnectionReactor goprotoextra.ToReactorFunc,
+) (intf.NextExternalFunc, error) {
+	_, _ = self.BaseConnectionReactor.Init(onSend, toConnectionReactor)
 	return self.doNext, nil
 }
 

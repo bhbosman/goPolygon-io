@@ -9,7 +9,6 @@ import (
 	"github.com/bhbosman/gocommon/model"
 	"github.com/bhbosman/gocomms/common"
 	"github.com/bhbosman/gocomms/intf"
-	"github.com/bhbosman/gocomms/netDial"
 	"go.uber.org/fx"
 )
 
@@ -43,15 +42,22 @@ func ProvideDialer(
 					fmt.Sprintf("goPolygon-io Dialer"),
 					fmt.Sprintf("wss://socket.polygon.io:443/forex"),
 					goCommsDefinitions.WebSocketName,
-					func() (intf.IConnectionReactorFactory, error) {
-						return NewConnectionReactorFactory(
-							crfName,
-							params.ApiKey,
-							params.FxCurrencyRegistration,
-							params.FxCurrencyAggregationRegistration,
-							params.TickersService), nil
-					},
-					netDial.MaxConnectionsSetting(1),
+					common.NewConnectionInstanceOptions(
+						fx.Provide(
+							fx.Annotated{
+								Target: func() (intf.IConnectionReactorFactory, error) {
+									return NewConnectionReactorFactory(
+										crfName,
+										params.ApiKey,
+										params.FxCurrencyRegistration,
+										params.FxCurrencyAggregationRegistration,
+										params.TickersService), nil
+								},
+							},
+						),
+					),
+
+					common.MaxConnectionsSetting(1),
 					//netDial.UserContextValue(option),
 					goCommsNetDialer.CanDial(settings.canDial...))
 				return f(params.NetAppFuncInParams)

@@ -36,7 +36,8 @@ func (self *factory) Create(
 	cancelFunc context.CancelFunc,
 	connectionCancelFunc model.ConnectionCancelFunc,
 	logger *zap.Logger,
-	userContext interface{}) intf.IConnectionReactor {
+	userContext interface{},
+) (intf.IConnectionReactor, error) {
 	result := NewConnectionReactor(
 		logger,
 		cancelCtx,
@@ -47,7 +48,7 @@ func (self *factory) Create(
 		self.fxAggregationRegistration,
 		userContext,
 		self.tickersService)
-	return result
+	return result, nil
 }
 
 func (self *factory) Values(inputValues map[string]interface{}) (map[string]interface{}, error) {
