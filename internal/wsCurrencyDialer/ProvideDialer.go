@@ -56,10 +56,11 @@ func ProvideDialer(
 							fx.Annotated{
 								Target: func() (intf.IConnectionReactorFactory, error) {
 									return NewConnectionReactorFactory(
-										params.ApiKey,
-										params.FxCurrencyRegistration,
-										params.FxCurrencyAggregationRegistration,
-										params.TickersService), nil
+											params.ApiKey,
+											params.FxCurrencyRegistration,
+											params.FxCurrencyAggregationRegistration,
+											params.TickersService),
+										nil
 								},
 							},
 						),
