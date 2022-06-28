@@ -203,10 +203,14 @@ func (self *reactor) dealWithStatus(msg *stream2.PolygonMessageResponse) {
 			}
 		}()
 		break
+	case "auth_failed":
+		self.Logger.Info("Receive auth failed", zap.String("Message", msg.Message))
+		self.CancelFunc()
+
 	case "success":
 		self.Logger.Info("Receive success message", zap.String("Message", msg.Message))
 	default:
-		zap.Any("Message", msg)
+		self.Logger.Info("Unknow state", zap.Any("Message", msg))
 	}
 }
 
@@ -262,10 +266,16 @@ func NewConnectionReactor(
 	fxAggregationRegistration string,
 
 	userContext interface{},
-	tickersService TickersService.ITickersService) *reactor {
+	tickersService TickersService.ITickersService,
+) *reactor {
 	result := &reactor{
 		BaseConnectionReactor: common.NewBaseConnectionReactor(
-			logger, cancelCtx, cancelFunc, connectionCancelFunc, userContext),
+			logger,
+			cancelCtx,
+			cancelFunc,
+			connectionCancelFunc,
+			userContext,
+		),
 		messageRouter:             messageRouter.NewMessageRouter(),
 		connectionStatus:          "",
 		apiKey:                    apiKey,
