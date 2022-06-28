@@ -66,7 +66,6 @@ func ProvideDialer(
 							},
 						),
 					),
-
 					common.MaxConnectionsSetting(1),
 					goCommsNetDialer.CanDial(settings.canDial...))
 				return f(params.NetAppFuncInParams), nil
