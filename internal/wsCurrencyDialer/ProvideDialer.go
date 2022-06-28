@@ -30,14 +30,16 @@ func ProvideDialer(
 	return fx.Provide(
 		fx.Annotated{
 			Group: "Apps",
-			Target: func(params struct {
-				fx.In
-				TickersService                    TickersService.ITickersService `name:"Polygon"`
-				ApiKey                            string                         `name:"Polygon-io.API.Key"`
-				FxCurrencyRegistration            string                         `name:"Polygon-io.WS.FX.Registration.C"`
-				FxCurrencyAggregationRegistration string                         `name:"Polygon-io.WS.FX.Registration.CA"`
-				NetAppFuncInParams                common.NetAppFuncInParams
-			}) messages.CreateAppCallback {
+			Target: func(
+				params struct {
+					fx.In
+					TickersService                    TickersService.ITickersService `name:"Polygon"`
+					ApiKey                            string                         `name:"Polygon-io.API.Key"`
+					FxCurrencyRegistration            string                         `name:"Polygon-io.WS.FX.Registration.C"`
+					FxCurrencyAggregationRegistration string                         `name:"Polygon-io.WS.FX.Registration.CA"`
+					NetAppFuncInParams                common.NetAppFuncInParams
+				},
+			) messages.CreateAppCallback {
 				f := goCommsNetDialer.NewNetDialApp(
 					fmt.Sprintf("goPolygon-io Dialer"),
 					serviceIdentifier,
