@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"github.com/bhbosman/goCommsDefinitions"
 	"github.com/bhbosman/goCommsNetDialer"
+	"github.com/bhbosman/goCommsStacks/bottom"
+	"github.com/bhbosman/goCommsStacks/top"
+	"github.com/bhbosman/goCommsStacks/websocket"
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	"github.com/bhbosman/gocommon/messages"
 	"github.com/bhbosman/gocommon/model"
@@ -43,6 +46,11 @@ func ProvideDialer(
 					fmt.Sprintf("wss://socket.polygon.io:443/forex"),
 					goCommsDefinitions.WebSocketName,
 					common.NewConnectionInstanceOptions(
+						goCommsDefinitions.ProvideTransportFactoryForWebSocketName(
+							top.ProvideTopStack(),
+							bottom.ProvideBottomStack(),
+							websocket.ProvideWebsocketStacks(),
+						),
 						fx.Provide(
 							fx.Annotated{
 								Target: func() (intf.IConnectionReactorFactory, error) {

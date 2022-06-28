@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/bhbosman/goCommsDefinitions v0.0.0-20220621071241-af78660729ca
 	github.com/bhbosman/goCommsNetDialer v0.0.0-20220623084808-6238b44079be
-	github.com/bhbosman/goCommsStacks v0.0.0-20220623192911-10540f173b30
+	github.com/bhbosman/goCommsStacks v0.0.0-20220628053835-8e5ac6a0c20b
 	github.com/bhbosman/goFxApp v0.0.0-20220627212218-a29bbf40d76d
 	github.com/bhbosman/gocommon v0.0.0-20220627073905-4951fb81c325
 	github.com/bhbosman/gocomms v0.0.0-20220623084809-dd9e90891743
@@ -29,6 +29,9 @@ require (
 	github.com/emirpasic/gods v1.12.0 // indirect
 	github.com/gdamore/encoding v1.0.0 // indirect
 	github.com/gdamore/tcell/v2 v2.5.1 // indirect
+	github.com/gobwas/httphead v0.1.0 // indirect
+	github.com/gobwas/pool v0.2.1 // indirect
+	github.com/gobwas/ws v1.1.0 // indirect
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/google/go-cmp v0.5.7 // indirect
 	github.com/icza/gox v0.0.0-20220321141217-e2d488ab2fbc // indirect
