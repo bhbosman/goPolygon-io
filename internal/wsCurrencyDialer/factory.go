@@ -9,7 +9,6 @@ import (
 )
 
 type factory struct {
-	crfName                   string
 	apiKey                    string
 	fxRegistration            string
 	fxAggregationRegistration string
@@ -17,13 +16,11 @@ type factory struct {
 }
 
 func NewConnectionReactorFactory(
-	crfName string,
 	apiKey string,
 	fxRegistration string,
 	fxAggregationRegistration string,
 	TickersService TickersService.ITickersService) *factory {
 	return &factory{
-		crfName:                   crfName,
 		apiKey:                    apiKey,
 		fxRegistration:            fxRegistration,
 		fxAggregationRegistration: fxAggregationRegistration,
@@ -49,13 +46,4 @@ func (self *factory) Create(
 		userContext,
 		self.tickersService)
 	return result, nil
-}
-
-func (self *factory) Values(inputValues map[string]interface{}) (map[string]interface{}, error) {
-	result := make(map[string]interface{})
-	return result, nil
-}
-
-func (self *factory) Name() string {
-	return self.crfName
 }

@@ -26,7 +26,6 @@ func ProvideDialer(
 		}
 		option.apply(settings)
 	}
-	crfName := "goPolygon-io.Dialer.CRF"
 	return fx.Provide(
 		fx.Annotated{
 			Group: "Apps",
@@ -57,7 +56,6 @@ func ProvideDialer(
 							fx.Annotated{
 								Target: func() (intf.IConnectionReactorFactory, error) {
 									return NewConnectionReactorFactory(
-										crfName,
 										params.ApiKey,
 										params.FxCurrencyRegistration,
 										params.FxCurrencyAggregationRegistration,
