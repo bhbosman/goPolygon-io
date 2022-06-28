@@ -3,12 +3,12 @@ module github.com/bhbosman/goPolygon-io
 go 1.18
 
 require (
-	github.com/bhbosman/goCommsDefinitions v0.0.0-20220621071241-af78660729ca
+	github.com/bhbosman/goCommsDefinitions v0.0.0-20220628093721-7191a8828f7f
 	github.com/bhbosman/goCommsNetDialer v0.0.0-20220623084808-6238b44079be
 	github.com/bhbosman/goCommsStacks v0.0.0-20220628053835-8e5ac6a0c20b
 	github.com/bhbosman/goFxApp v0.0.0-20220627212218-a29bbf40d76d
-	github.com/bhbosman/gocommon v0.0.0-20220627073905-4951fb81c325
-	github.com/bhbosman/gocomms v0.0.0-20220623084809-dd9e90891743
+	github.com/bhbosman/gocommon v0.0.0-20220628055238-cde1e1c5e593
+	github.com/bhbosman/gocomms v0.0.0-20220628074707-e93417aaaed2
 	github.com/bhbosman/goerrors v0.0.0-20220623084908-4d7bbcd178cf
 	github.com/bhbosman/gomessageblock v0.0.0-20220617132215-32f430d7de62
 	github.com/bhbosman/goprotoextra v0.0.2-0.20210817141206-117becbef7c7
@@ -18,6 +18,8 @@ require (
 	go.uber.org/zap v1.21.0
 	google.golang.org/protobuf v1.27.1
 )
+
+require golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f // indirect
 
 require (
 	github.com/bhbosman/goConnectionManager v0.0.0-20220628055237-4a995b1ae47c // indirect
@@ -83,3 +85,5 @@ replace github.com/bhbosman/goUi => ../goUi
 replace github.com/bhbosman/goerrors => ../goerrors
 
 replace github.com/bhbosman/goConnectionManager => ../goConnectionManager
+
+replace github.com/rivo/tview => ../tview
