@@ -39,7 +39,7 @@ func ProvideDialer(
 					FxCurrencyAggregationRegistration string                         `name:"Polygon-io.WS.FX.Registration.CA"`
 					NetAppFuncInParams                common.NetAppFuncInParams
 				},
-			) messages.CreateAppCallback {
+			) (messages.CreateAppCallback, error) {
 				f := goCommsNetDialer.NewNetDialApp(
 					fmt.Sprintf("goPolygon-io Dialer"),
 					serviceIdentifier,
@@ -68,9 +68,8 @@ func ProvideDialer(
 					),
 
 					common.MaxConnectionsSetting(1),
-					//netDial.UserContextValue(option),
 					goCommsNetDialer.CanDial(settings.canDial...))
-				return f(params.NetAppFuncInParams)
+				return f(params.NetAppFuncInParams), nil
 			},
 		})
 }
