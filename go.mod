@@ -13,6 +13,7 @@ require (
 	github.com/bhbosman/gomessageblock v0.0.0-20220617132215-32f430d7de62
 	github.com/bhbosman/goprotoextra v0.0.2-0.20210817141206-117becbef7c7
 	github.com/golang/protobuf v1.5.2
+	github.com/reactivex/rxgo/v2 v2.5.0
 	github.com/stretchr/testify v1.7.5
 	go.uber.org/fx v1.17.1
 	go.uber.org/zap v1.21.0
@@ -42,7 +43,6 @@ require (
 	github.com/mattn/go-runewidth v0.0.13 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/reactivex/rxgo/v2 v2.5.0 // indirect
 	github.com/rivo/tview v0.0.0-20220610163003-691f46d6f500 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/rogpeppe/go-internal v1.8.1 // indirect
@@ -87,3 +87,5 @@ replace github.com/bhbosman/goerrors => ../goerrors
 replace github.com/bhbosman/goConnectionManager => ../goConnectionManager
 
 replace github.com/rivo/tview => ../tview
+
+replace github.com/bhbosman/goprotoextra => ../goprotoextra

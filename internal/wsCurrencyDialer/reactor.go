@@ -12,11 +12,11 @@ import (
 	common3 "github.com/bhbosman/gocommon/model"
 	"github.com/bhbosman/gocommon/stream"
 	"github.com/bhbosman/gocomms/common"
-	"github.com/bhbosman/gocomms/intf"
 	"github.com/bhbosman/gomessageblock"
 	"github.com/bhbosman/goprotoextra"
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
+	"github.com/reactivex/rxgo/v2"
 	"go.uber.org/zap"
 	"strings"
 )
@@ -39,9 +39,27 @@ func (self *reactor) Close() error {
 func (self *reactor) Init(
 	onSend goprotoextra.ToConnectionFunc,
 	toConnectionReactor goprotoextra.ToReactorFunc,
-) (intf.NextExternalFunc, error) {
-	_, _ = self.BaseConnectionReactor.Init(onSend, toConnectionReactor)
-	return self.doNext, nil
+	onSendReplacement rxgo.NextFunc,
+	toConnectionReactorReplacement rxgo.NextFunc,
+) (rxgo.NextFunc, rxgo.ErrFunc, rxgo.CompletedFunc, error) {
+	_, _, _, err := self.BaseConnectionReactor.Init(
+		onSend,
+		toConnectionReactor,
+		onSendReplacement,
+		toConnectionReactorReplacement,
+	)
+	if err != nil {
+		return nil, nil, nil, err
+	}
+	return func(i interface{}) {
+			self.doNext(false, i)
+		},
+		func(err error) {
+			self.doNext(false, err)
+		},
+		func() {
+
+		}, nil
 }
 
 func (self *reactor) Open() error {
@@ -57,7 +75,16 @@ func (self *reactor) doNext(_ bool, i interface{}) {
 }
 
 func (self *reactor) handleReaderWriter(msg *gomessageblock.ReaderWriter) error {
-	marshal, err := stream.UnMarshal(msg, self.CancelCtx, self.CancelFunc, self.ToReactor, self.ToConnection)
+	marshal, err := stream.UnMarshal(
+		msg,
+		func(i interface{}) {
+			self.ToReactor(false, i)
+		},
+		func(i interface{}) {
+			if unk, ok := i.(goprotoextra.ReadWriterSize); ok {
+				self.ToConnection(unk)
+			}
+		})
 	if err != nil {
 		return err
 	}

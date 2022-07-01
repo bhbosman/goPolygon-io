@@ -13,6 +13,7 @@ import (
 	"github.com/bhbosman/gocomms/common"
 	"github.com/bhbosman/gocomms/intf"
 	"go.uber.org/fx"
+	"net/url"
 )
 
 func ProvideDialer(
@@ -39,17 +40,23 @@ func ProvideDialer(
 					NetAppFuncInParams                common.NetAppFuncInParams
 				},
 			) (messages.CreateAppCallback, error) {
+				u, e := url.Parse("wss://socket.polygon.io:443/forex")
+				if e != nil {
+					return messages.CreateAppCallback{}, e
+				}
 				f := goCommsNetDialer.NewNetDialApp(
 					fmt.Sprintf("goPolygon-io Dialer"),
 					serviceIdentifier,
 					serviceDependentOn,
 					fmt.Sprintf("goPolygon-io Dialer"),
-					fmt.Sprintf("wss://socket.polygon.io:443/forex"),
+					false,
+					nil,
+					u,
 					goCommsDefinitions.WebSocketName,
 					common.NewConnectionInstanceOptions(
 						goCommsDefinitions.ProvideTransportFactoryForWebSocketName(
 							top.ProvideTopStack(),
-							bottom.ProvideBottomStack(),
+							bottom.Provide(),
 							websocket.ProvideWebsocketStacks(),
 						),
 						fx.Provide(
