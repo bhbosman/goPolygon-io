@@ -11,7 +11,6 @@ import (
 	"github.com/bhbosman/gocommon/messages"
 	"github.com/bhbosman/gocommon/model"
 	"github.com/bhbosman/gocomms/common"
-	"github.com/bhbosman/gocomms/intf"
 	"go.uber.org/fx"
 	"net/url"
 )
@@ -59,22 +58,23 @@ func ProvideDialer(
 							bottom.Provide(),
 							websocket.ProvideWebsocketStacks(),
 						),
+						goCommsDefinitions.ProvideStringContext("Polygon-io.API.Key", params.ApiKey),
+						goCommsDefinitions.ProvideStringContext("Polygon-io.WS.FX.Registration.C", params.FxCurrencyRegistration),
+						goCommsDefinitions.ProvideStringContext("Polygon-io.WS.FX.Registration.CA", params.FxCurrencyAggregationRegistration),
 						fx.Provide(
 							fx.Annotated{
-								Target: func() (intf.IConnectionReactorFactory, error) {
-									return NewConnectionReactorFactory(
-											params.ApiKey,
-											params.FxCurrencyRegistration,
-											params.FxCurrencyAggregationRegistration,
-											params.TickersService),
-										nil
+								Name: "Polygon",
+								Target: func() TickersService.ITickersService {
+									return params.TickersService
 								},
 							},
 						),
+						ProvideConnectionReactor(),
 					),
 					common.MaxConnectionsSetting(1),
 					goCommsNetDialer.CanDial(settings.canDial...))
 				return f(params.NetAppFuncInParams), nil
 			},
-		})
+		},
+	)
 }
