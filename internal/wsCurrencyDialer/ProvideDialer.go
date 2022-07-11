@@ -5,6 +5,7 @@ import (
 	"github.com/bhbosman/goCommsDefinitions"
 	"github.com/bhbosman/goCommsNetDialer"
 	"github.com/bhbosman/goCommsStacks/bottom"
+	"github.com/bhbosman/goCommsStacks/topStack"
 	"github.com/bhbosman/goCommsStacks/websocket"
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	"github.com/bhbosman/gocommon/messages"
@@ -50,7 +51,7 @@ func ProvideDialer(
 					false,
 					nil,
 					u,
-					goCommsDefinitions.WebSocketName,
+					//goCommsDefinitions.WebSocketName,
 					common.NewConnectionInstanceOptions(
 						goCommsDefinitions.ProvideTransportFactoryForWebSocketName(
 							topStack.ProvideTopStack(),
