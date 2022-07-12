@@ -2,6 +2,7 @@ package wsCurrencyDialer
 
 import (
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
+	"github.com/bhbosman/gocommon/Services/interfaces"
 	"github.com/bhbosman/gocommon/model"
 	"github.com/bhbosman/gocomms/intf"
 	"go.uber.org/fx"
@@ -25,6 +26,7 @@ func ProvideConnectionReactor() fx.Option {
 						ApiKey                            string                         `name:"Polygon-io.API.Key"`
 						FxCurrencyRegistration            string                         `name:"Polygon-io.WS.FX.Registration.C"`
 						FxCurrencyAggregationRegistration string                         `name:"Polygon-io.WS.FX.Registration.CA"`
+						UniqueReferenceService            interfaces.IUniqueReferenceService
 					},
 				) (intf.IConnectionReactor, error) {
 					result := NewConnectionReactor(
@@ -36,7 +38,9 @@ func ProvideConnectionReactor() fx.Option {
 						params.FxCurrencyRegistration,
 						params.FxCurrencyAggregationRegistration,
 						params.ClientContext,
-						params.TickersService)
+						params.TickersService,
+						params.UniqueReferenceService,
+					)
 					return result, nil
 				},
 			},

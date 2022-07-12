@@ -8,6 +8,7 @@ import (
 	"github.com/bhbosman/goCommsStacks/webSocketMessages/wsmsg"
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	stream2 "github.com/bhbosman/goPolygon-io/internal/stream"
+	"github.com/bhbosman/gocommon/Services/interfaces"
 	"github.com/bhbosman/gocommon/messageRouter"
 	common3 "github.com/bhbosman/gocommon/model"
 	"github.com/bhbosman/gocommon/stream"
@@ -41,15 +42,15 @@ func (self *reactor) Init(
 	toConnectionReactor goprotoextra.ToReactorFunc,
 	onSendReplacement rxgo.NextFunc,
 	toConnectionReactorReplacement rxgo.NextFunc,
-) (rxgo.NextFunc, rxgo.ErrFunc, rxgo.CompletedFunc, error) {
-	_, _, _, err := self.BaseConnectionReactor.Init(
+) (rxgo.NextFunc, rxgo.ErrFunc, rxgo.CompletedFunc, chan interface{}, error) {
+	_, _, _, _, err := self.BaseConnectionReactor.Init(
 		onSend,
 		toConnectionReactor,
 		onSendReplacement,
 		toConnectionReactorReplacement,
 	)
 	if err != nil {
-		return nil, nil, nil, err
+		return nil, nil, nil, nil, err
 	}
 	return func(i interface{}) {
 			self.doNext(false, i)
@@ -59,7 +60,7 @@ func (self *reactor) Init(
 		},
 		func() {
 
-		}, nil
+		}, nil, nil
 }
 
 func (self *reactor) Open() error {
@@ -294,6 +295,7 @@ func NewConnectionReactor(
 
 	userContext interface{},
 	tickersService TickersService.ITickersService,
+	UniqueReferenceService interfaces.IUniqueReferenceService,
 ) *reactor {
 	result := &reactor{
 		BaseConnectionReactor: common.NewBaseConnectionReactor(
@@ -302,6 +304,7 @@ func NewConnectionReactor(
 			cancelFunc,
 			connectionCancelFunc,
 			userContext,
+			UniqueReferenceService.Next("ConnectionReactor"),
 		),
 		messageRouter:             messageRouter.NewMessageRouter(),
 		connectionStatus:          "",
