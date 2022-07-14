@@ -17,11 +17,11 @@ func ProvideConnectionReactor() fx.Option {
 				Target: func(
 					params struct {
 						fx.In
-						CancelCtx                         context.Context
-						CancelFunc                        context.CancelFunc
-						ConnectionCancelFunc              model.ConnectionCancelFunc
-						Logger                            *zap.Logger
-						ClientContext                     interface{}                    `name:"UserContext"`
+						CancelCtx            context.Context
+						CancelFunc           context.CancelFunc
+						ConnectionCancelFunc model.ConnectionCancelFunc
+						Logger               *zap.Logger
+						//ClientContext                     interface{}                    `name:"UserContext"`
 						TickersService                    TickersService.ITickersService `name:"Polygon"`
 						ApiKey                            string                         `name:"Polygon-io.API.Key"`
 						FxCurrencyRegistration            string                         `name:"Polygon-io.WS.FX.Registration.C"`
@@ -37,7 +37,7 @@ func ProvideConnectionReactor() fx.Option {
 						params.ApiKey,
 						params.FxCurrencyRegistration,
 						params.FxCurrencyAggregationRegistration,
-						params.ClientContext,
+						//params.ClientContext,
 						params.TickersService,
 						params.UniqueReferenceService,
 					)

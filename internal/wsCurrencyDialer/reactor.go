@@ -292,8 +292,7 @@ func NewConnectionReactor(
 	apiKey string,
 	fxRegistration string,
 	fxAggregationRegistration string,
-
-	userContext interface{},
+	//userContext interface{},
 	tickersService TickersService.ITickersService,
 	UniqueReferenceService interfaces.IUniqueReferenceService,
 ) *reactor {
@@ -303,7 +302,7 @@ func NewConnectionReactor(
 			cancelCtx,
 			cancelFunc,
 			connectionCancelFunc,
-			userContext,
+			//userContext,
 			UniqueReferenceService.Next("ConnectionReactor"),
 		),
 		messageRouter:             messageRouter.NewMessageRouter(),

@@ -43,16 +43,16 @@ func ProvideDialer(
 				if e != nil {
 					return messages.CreateAppCallback{}, e
 				}
-				f := goCommsNetDialer.NewNetDialApp(
+				f := goCommsNetDialer.NewSingleNetDialApp(
 					fmt.Sprintf("goPolygon-io Dialer"),
 					serviceIdentifier,
 					serviceDependentOn,
 					fmt.Sprintf("goPolygon-io Dialer"),
-					false,
-					nil,
-					u,
-					//goCommsDefinitions.WebSocketName,
-					common.NewConnectionInstanceOptions(
+					common.MoreOptions(
+						goCommsDefinitions.ProvideUrl("ConnectionUrl", u),
+						goCommsDefinitions.ProvideUrl("ProxyUrl", nil),
+						goCommsDefinitions.ProvideBool("UseProxy", false),
+					), common.NewConnectionInstanceOptions(
 						goCommsDefinitions.ProvideTransportFactoryForWebSocketName(
 							topStack.ProvideTopStack(),
 							bottom.Provide(),
