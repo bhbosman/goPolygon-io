@@ -3,11 +3,11 @@ module github.com/bhbosman/goPolygon-io
 go 1.18
 
 require (
-	github.com/bhbosman/goCommsDefinitions v0.0.0-20220707044904-ceb8c2737904
+	github.com/bhbosman/goCommsDefinitions v0.0.0-20220721070505-30206872567f
 	github.com/bhbosman/goCommsNetDialer v0.0.0-20220623084808-6238b44079be
 	github.com/bhbosman/goCommsStacks v0.0.0-20220628053835-8e5ac6a0c20b
 	github.com/bhbosman/goFxApp v0.0.0-20220627212218-a29bbf40d76d
-	github.com/bhbosman/gocommon v0.0.0-20220707045107-1b6a40e49fd5
+	github.com/bhbosman/gocommon v0.0.0-20220718213201-2711fee77ae4
 	github.com/bhbosman/gocomms v0.0.0-20220628074707-e93417aaaed2
 	github.com/bhbosman/goerrors v0.0.0-20220623084908-4d7bbcd178cf
 	github.com/bhbosman/gomessageblock v0.0.0-20220617132215-32f430d7de62
@@ -23,7 +23,7 @@ require (
 require golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f
 
 require (
-	github.com/bhbosman/goConnectionManager v0.0.0-20220705103338-3f5a18784e60 // indirect
+	github.com/bhbosman/goConnectionManager v0.0.0-20220721070628-0f4b3c036d93 // indirect
 	github.com/bhbosman/goFxAppManager v0.0.0-20220625173841-bbd050c3bfe2 // indirect
 	github.com/bhbosman/goUi v0.0.0-20220625174028-03193a90ee79 // indirect
 	github.com/cenkalti/backoff/v4 v4.1.2 // indirect

@@ -14,7 +14,6 @@ import (
 	"github.com/bhbosman/gocommon/stream"
 	"github.com/bhbosman/gocomms/common"
 	"github.com/bhbosman/gomessageblock"
-	"github.com/bhbosman/goprotoextra"
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
 	"github.com/reactivex/rxgo/v2"
@@ -38,16 +37,12 @@ func (self *reactor) Close() error {
 }
 
 func (self *reactor) Init(
-	onSend goprotoextra.ToConnectionFunc,
-	toConnectionReactor goprotoextra.ToReactorFunc,
-	onSendReplacement rxgo.NextFunc,
-	toConnectionReactorReplacement rxgo.NextFunc,
+	onSendToReactor rxgo.NextFunc,
+	onSendToConnection rxgo.NextFunc,
 ) (rxgo.NextFunc, rxgo.ErrFunc, rxgo.CompletedFunc, chan interface{}, error) {
 	_, _, _, _, err := self.BaseConnectionReactor.Init(
-		onSend,
-		toConnectionReactor,
-		onSendReplacement,
-		toConnectionReactorReplacement,
+		onSendToReactor,
+		onSendToConnection,
 	)
 	if err != nil {
 		return nil, nil, nil, nil, err
@@ -76,16 +71,7 @@ func (self *reactor) doNext(_ bool, i interface{}) {
 }
 
 func (self *reactor) handleReaderWriter(msg *gomessageblock.ReaderWriter) error {
-	marshal, err := stream.UnMarshal(
-		msg,
-		func(i interface{}) {
-			self.ToReactor(false, i)
-		},
-		func(i interface{}) {
-			if unk, ok := i.(goprotoextra.ReadWriterSize); ok {
-				self.ToConnection(unk)
-			}
-		})
+	marshal, err := stream.UnMarshal(msg)
 	if err != nil {
 		return err
 	}
@@ -193,7 +179,8 @@ func (self *reactor) sendMessage(message proto.Message) error {
 		return err
 	}
 
-	return self.ToConnection(readWriterSize)
+	self.OnSendToConnection(readWriterSize)
+	return nil
 }
 
 func (self *reactor) dealWithStatus(msg *stream2.PolygonMessageResponse) {
@@ -225,10 +212,7 @@ func (self *reactor) dealWithStatus(msg *stream2.PolygonMessageResponse) {
 				}
 				tickers, err = self.tickersService.TickersNext(tickers.NextUrl)
 			}
-			err = self.ToReactor(false, newTickerServiceResponse(list))
-			if err != nil {
-				return
-			}
+			self.OnSendToReactor(newTickerServiceResponse(list))
 		}()
 		break
 	case "auth_failed":

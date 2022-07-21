@@ -10,7 +10,6 @@ import (
 	stream "github.com/bhbosman/gocommon/stream"
 	goerrors "github.com/bhbosman/goerrors"
 	goprotoextra "github.com/bhbosman/goprotoextra"
-	v2 "github.com/reactivex/rxgo/v2"
 	proto "google.golang.org/protobuf/proto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -390,14 +389,10 @@ func (self *PolygonMessageRequestWrapper) messageWrapper() interface{} {
 }
 
 func NewPolygonMessageRequestWrapper(
-	toReactor v2.NextFunc,
-	toConnection v2.NextFunc,
 	data *PolygonMessageRequest) *PolygonMessageRequestWrapper {
 	return &PolygonMessageRequestWrapper{
-		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(
-			toReactor,
-			toConnection),
-		Data: data,
+		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(),
+		Data:               data,
 	}
 }
 
@@ -408,13 +403,9 @@ var _ = stream.Register(
 			return &PolygonMessageRequest{}
 		},
 		CreateWrapper: func(
-			toReactor v2.NextFunc,
-			toConnection v2.NextFunc,
 			data proto.Message) (goprotoextra.IMessageWrapper, error) {
 			if msg, ok := data.(*PolygonMessageRequest); ok {
 				return NewPolygonMessageRequestWrapper(
-					toReactor,
-					toConnection,
 					msg), nil
 			}
 			return nil, goerrors.InvalidParam
@@ -438,14 +429,10 @@ func (self *PolygonMessageResponseWrapper) messageWrapper() interface{} {
 }
 
 func NewPolygonMessageResponseWrapper(
-	toReactor v2.NextFunc,
-	toConnection v2.NextFunc,
 	data *PolygonMessageResponse) *PolygonMessageResponseWrapper {
 	return &PolygonMessageResponseWrapper{
-		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(
-			toReactor,
-			toConnection),
-		Data: data,
+		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(),
+		Data:               data,
 	}
 }
 
@@ -456,13 +443,9 @@ var _ = stream.Register(
 			return &PolygonMessageResponse{}
 		},
 		CreateWrapper: func(
-			toReactor v2.NextFunc,
-			toConnection v2.NextFunc,
 			data proto.Message) (goprotoextra.IMessageWrapper, error) {
 			if msg, ok := data.(*PolygonMessageResponse); ok {
 				return NewPolygonMessageResponseWrapper(
-					toReactor,
-					toConnection,
 					msg), nil
 			}
 			return nil, goerrors.InvalidParam

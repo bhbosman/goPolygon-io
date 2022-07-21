@@ -10,7 +10,6 @@ import (
 	stream "github.com/bhbosman/gocommon/stream"
 	goerrors "github.com/bhbosman/goerrors"
 	goprotoextra "github.com/bhbosman/goprotoextra"
-	v2 "github.com/reactivex/rxgo/v2"
 	proto "google.golang.org/protobuf/proto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -1316,14 +1315,10 @@ func (self *ReferenceDataTickersWrapper) messageWrapper() interface{} {
 }
 
 func NewReferenceDataTickersWrapper(
-	toReactor v2.NextFunc,
-	toConnection v2.NextFunc,
 	data *ReferenceDataTickers) *ReferenceDataTickersWrapper {
 	return &ReferenceDataTickersWrapper{
-		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(
-			toReactor,
-			toConnection),
-		Data: data,
+		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(),
+		Data:               data,
 	}
 }
 
@@ -1334,13 +1329,9 @@ var _ = stream.Register(
 			return &ReferenceDataTickers{}
 		},
 		CreateWrapper: func(
-			toReactor v2.NextFunc,
-			toConnection v2.NextFunc,
 			data proto.Message) (goprotoextra.IMessageWrapper, error) {
 			if msg, ok := data.(*ReferenceDataTickers); ok {
 				return NewReferenceDataTickersWrapper(
-					toReactor,
-					toConnection,
 					msg), nil
 			}
 			return nil, goerrors.InvalidParam
@@ -1364,14 +1355,10 @@ func (self *ReferenceDataTickersResponseWrapper) messageWrapper() interface{} {
 }
 
 func NewReferenceDataTickersResponseWrapper(
-	toReactor v2.NextFunc,
-	toConnection v2.NextFunc,
 	data *ReferenceDataTickersResponse) *ReferenceDataTickersResponseWrapper {
 	return &ReferenceDataTickersResponseWrapper{
-		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(
-			toReactor,
-			toConnection),
-		Data: data,
+		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(),
+		Data:               data,
 	}
 }
 
@@ -1382,13 +1369,9 @@ var _ = stream.Register(
 			return &ReferenceDataTickersResponse{}
 		},
 		CreateWrapper: func(
-			toReactor v2.NextFunc,
-			toConnection v2.NextFunc,
 			data proto.Message) (goprotoextra.IMessageWrapper, error) {
 			if msg, ok := data.(*ReferenceDataTickersResponse); ok {
 				return NewReferenceDataTickersResponseWrapper(
-					toReactor,
-					toConnection,
 					msg), nil
 			}
 			return nil, goerrors.InvalidParam
@@ -1412,14 +1395,10 @@ func (self *ReferenceDataTickerTypesWrapper) messageWrapper() interface{} {
 }
 
 func NewReferenceDataTickerTypesWrapper(
-	toReactor v2.NextFunc,
-	toConnection v2.NextFunc,
 	data *ReferenceDataTickerTypes) *ReferenceDataTickerTypesWrapper {
 	return &ReferenceDataTickerTypesWrapper{
-		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(
-			toReactor,
-			toConnection),
-		Data: data,
+		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(),
+		Data:               data,
 	}
 }
 
@@ -1430,13 +1409,9 @@ var _ = stream.Register(
 			return &ReferenceDataTickerTypes{}
 		},
 		CreateWrapper: func(
-			toReactor v2.NextFunc,
-			toConnection v2.NextFunc,
 			data proto.Message) (goprotoextra.IMessageWrapper, error) {
 			if msg, ok := data.(*ReferenceDataTickerTypes); ok {
 				return NewReferenceDataTickerTypesWrapper(
-					toReactor,
-					toConnection,
 					msg), nil
 			}
 			return nil, goerrors.InvalidParam
@@ -1460,14 +1435,10 @@ func (self *ReferenceDataTickerTypesResponseWrapper) messageWrapper() interface{
 }
 
 func NewReferenceDataTickerTypesResponseWrapper(
-	toReactor v2.NextFunc,
-	toConnection v2.NextFunc,
 	data *ReferenceDataTickerTypesResponse) *ReferenceDataTickerTypesResponseWrapper {
 	return &ReferenceDataTickerTypesResponseWrapper{
-		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(
-			toReactor,
-			toConnection),
-		Data: data,
+		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(),
+		Data:               data,
 	}
 }
 
@@ -1478,13 +1449,9 @@ var _ = stream.Register(
 			return &ReferenceDataTickerTypesResponse{}
 		},
 		CreateWrapper: func(
-			toReactor v2.NextFunc,
-			toConnection v2.NextFunc,
 			data proto.Message) (goprotoextra.IMessageWrapper, error) {
 			if msg, ok := data.(*ReferenceDataTickerTypesResponse); ok {
 				return NewReferenceDataTickerTypesResponseWrapper(
-					toReactor,
-					toConnection,
 					msg), nil
 			}
 			return nil, goerrors.InvalidParam
@@ -1508,14 +1475,10 @@ func (self *ReferenceDataTickerDetailsWrapper) messageWrapper() interface{} {
 }
 
 func NewReferenceDataTickerDetailsWrapper(
-	toReactor v2.NextFunc,
-	toConnection v2.NextFunc,
 	data *ReferenceDataTickerDetails) *ReferenceDataTickerDetailsWrapper {
 	return &ReferenceDataTickerDetailsWrapper{
-		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(
-			toReactor,
-			toConnection),
-		Data: data,
+		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(),
+		Data:               data,
 	}
 }
 
@@ -1526,13 +1489,9 @@ var _ = stream.Register(
 			return &ReferenceDataTickerDetails{}
 		},
 		CreateWrapper: func(
-			toReactor v2.NextFunc,
-			toConnection v2.NextFunc,
 			data proto.Message) (goprotoextra.IMessageWrapper, error) {
 			if msg, ok := data.(*ReferenceDataTickerDetails); ok {
 				return NewReferenceDataTickerDetailsWrapper(
-					toReactor,
-					toConnection,
 					msg), nil
 			}
 			return nil, goerrors.InvalidParam
@@ -1556,14 +1515,10 @@ func (self *NewsPublisherWrapper) messageWrapper() interface{} {
 }
 
 func NewNewsPublisherWrapper(
-	toReactor v2.NextFunc,
-	toConnection v2.NextFunc,
 	data *NewsPublisher) *NewsPublisherWrapper {
 	return &NewsPublisherWrapper{
-		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(
-			toReactor,
-			toConnection),
-		Data: data,
+		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(),
+		Data:               data,
 	}
 }
 
@@ -1574,13 +1529,9 @@ var _ = stream.Register(
 			return &NewsPublisher{}
 		},
 		CreateWrapper: func(
-			toReactor v2.NextFunc,
-			toConnection v2.NextFunc,
 			data proto.Message) (goprotoextra.IMessageWrapper, error) {
 			if msg, ok := data.(*NewsPublisher); ok {
 				return NewNewsPublisherWrapper(
-					toReactor,
-					toConnection,
 					msg), nil
 			}
 			return nil, goerrors.InvalidParam
@@ -1604,14 +1555,10 @@ func (self *ReferenceDataTickerNewsWrapper) messageWrapper() interface{} {
 }
 
 func NewReferenceDataTickerNewsWrapper(
-	toReactor v2.NextFunc,
-	toConnection v2.NextFunc,
 	data *ReferenceDataTickerNews) *ReferenceDataTickerNewsWrapper {
 	return &ReferenceDataTickerNewsWrapper{
-		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(
-			toReactor,
-			toConnection),
-		Data: data,
+		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(),
+		Data:               data,
 	}
 }
 
@@ -1622,13 +1569,9 @@ var _ = stream.Register(
 			return &ReferenceDataTickerNews{}
 		},
 		CreateWrapper: func(
-			toReactor v2.NextFunc,
-			toConnection v2.NextFunc,
 			data proto.Message) (goprotoextra.IMessageWrapper, error) {
 			if msg, ok := data.(*ReferenceDataTickerNews); ok {
 				return NewReferenceDataTickerNewsWrapper(
-					toReactor,
-					toConnection,
 					msg), nil
 			}
 			return nil, goerrors.InvalidParam
@@ -1652,14 +1595,10 @@ func (self *ReferenceDataTickerNewsResponseWrapper) messageWrapper() interface{}
 }
 
 func NewReferenceDataTickerNewsResponseWrapper(
-	toReactor v2.NextFunc,
-	toConnection v2.NextFunc,
 	data *ReferenceDataTickerNewsResponse) *ReferenceDataTickerNewsResponseWrapper {
 	return &ReferenceDataTickerNewsResponseWrapper{
-		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(
-			toReactor,
-			toConnection),
-		Data: data,
+		BaseMessageWrapper: goprotoextra.NewBaseMessageWrapper(),
+		Data:               data,
 	}
 }
 
@@ -1670,13 +1609,9 @@ var _ = stream.Register(
 			return &ReferenceDataTickerNewsResponse{}
 		},
 		CreateWrapper: func(
-			toReactor v2.NextFunc,
-			toConnection v2.NextFunc,
 			data proto.Message) (goprotoextra.IMessageWrapper, error) {
 			if msg, ok := data.(*ReferenceDataTickerNewsResponse); ok {
 				return NewReferenceDataTickerNewsResponseWrapper(
-					toReactor,
-					toConnection,
 					msg), nil
 			}
 			return nil, goerrors.InvalidParam
