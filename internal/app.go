@@ -1,9 +1,7 @@
 package internal
 
 import (
-	"github.com/bhbosman/goCommsNetDialer"
 	"github.com/bhbosman/goFxApp"
-
 	//"github.com/bhbosman/goFxApp/FxWrappers"
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	"github.com/bhbosman/goPolygon-io/internal/rest/http"
@@ -31,7 +29,6 @@ func NewApp(
 	}
 
 	var shutDowner fx.Shutdowner
-	ConsumerCounter := goCommsNetDialer.NewCanDialDefaultImpl()
 	//var dd *gocommon.RunTimeManager
 
 	fxApp := goFxApp.NewFxMainApplicationServices(
@@ -39,11 +36,9 @@ func NewApp(
 		false,
 		ProvidePolygonKeys(),
 		Providers.RegisterRunTimeManager(),
-
 		wsCurrencyDialer.ProvideDialer(
-			0,
-			0,
-			wsCurrencyDialer.MaxConnections(1), wsCurrencyDialer.CanDial(ConsumerCounter)),
+			wsCurrencyDialer.MaxConnections(1),
+		),
 		TickersService.Provide(),
 		http.Provide(),
 

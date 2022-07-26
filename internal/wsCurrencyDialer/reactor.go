@@ -8,12 +8,14 @@ import (
 	"github.com/bhbosman/goCommsStacks/webSocketMessages/wsmsg"
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	stream2 "github.com/bhbosman/goPolygon-io/internal/stream"
+	"github.com/bhbosman/gocommon/GoFunctionCounter"
 	"github.com/bhbosman/gocommon/Services/interfaces"
 	"github.com/bhbosman/gocommon/messageRouter"
 	common3 "github.com/bhbosman/gocommon/model"
 	"github.com/bhbosman/gocommon/stream"
 	"github.com/bhbosman/gocomms/common"
 	"github.com/bhbosman/gomessageblock"
+	"github.com/cskr/pubsub"
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
 	"github.com/reactivex/rxgo/v2"
@@ -39,13 +41,13 @@ func (self *reactor) Close() error {
 func (self *reactor) Init(
 	onSendToReactor rxgo.NextFunc,
 	onSendToConnection rxgo.NextFunc,
-) (rxgo.NextFunc, rxgo.ErrFunc, rxgo.CompletedFunc, chan interface{}, error) {
-	_, _, _, _, err := self.BaseConnectionReactor.Init(
+) (rxgo.NextFunc, rxgo.ErrFunc, rxgo.CompletedFunc, error) {
+	_, _, _, err := self.BaseConnectionReactor.Init(
 		onSendToReactor,
 		onSendToConnection,
 	)
 	if err != nil {
-		return nil, nil, nil, nil, err
+		return nil, nil, nil, err
 	}
 	return func(i interface{}) {
 			self.doNext(false, i)
@@ -55,7 +57,7 @@ func (self *reactor) Init(
 		},
 		func() {
 
-		}, nil, nil
+		}, nil
 }
 
 func (self *reactor) Open() error {
@@ -276,9 +278,10 @@ func NewConnectionReactor(
 	apiKey string,
 	fxRegistration string,
 	fxAggregationRegistration string,
-	//userContext interface{},
 	tickersService TickersService.ITickersService,
 	UniqueReferenceService interfaces.IUniqueReferenceService,
+	PubSub *pubsub.PubSub,
+	GoFunctionCounter GoFunctionCounter.IService,
 ) *reactor {
 	result := &reactor{
 		BaseConnectionReactor: common.NewBaseConnectionReactor(
@@ -286,8 +289,9 @@ func NewConnectionReactor(
 			cancelCtx,
 			cancelFunc,
 			connectionCancelFunc,
-			//userContext,
 			UniqueReferenceService.Next("ConnectionReactor"),
+			PubSub,
+			GoFunctionCounter,
 		),
 		messageRouter:             messageRouter.NewMessageRouter(),
 		connectionStatus:          "",

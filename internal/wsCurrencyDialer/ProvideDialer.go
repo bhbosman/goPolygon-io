@@ -8,16 +8,16 @@ import (
 	"github.com/bhbosman/goCommsStacks/topStack"
 	"github.com/bhbosman/goCommsStacks/websocket"
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
+	"github.com/bhbosman/gocommon/GoFunctionCounter"
+	"github.com/bhbosman/gocommon/fx/PubSub"
 	"github.com/bhbosman/gocommon/messages"
-	"github.com/bhbosman/gocommon/model"
 	"github.com/bhbosman/gocomms/common"
+	"github.com/cskr/pubsub"
 	"go.uber.org/fx"
 	"net/url"
 )
 
 func ProvideDialer(
-	serviceIdentifier model.ServiceIdentifier,
-	serviceDependentOn model.ServiceIdentifier,
 	options ...IDialerSetting) fx.Option {
 	settings := &DialerSettings{}
 	for _, option := range options {
@@ -37,6 +37,8 @@ func ProvideDialer(
 					FxCurrencyRegistration            string                         `name:"Polygon-io.WS.FX.Registration.C"`
 					FxCurrencyAggregationRegistration string                         `name:"Polygon-io.WS.FX.Registration.CA"`
 					NetAppFuncInParams                common.NetAppFuncInParams
+					PubSub                            *pubsub.PubSub `name:"Application"`
+					GoFunctionCounter                 GoFunctionCounter.IService
 				},
 			) (messages.CreateAppCallback, error) {
 				u, e := url.Parse("wss://socket.polygon.io:443/forex")
@@ -45,8 +47,6 @@ func ProvideDialer(
 				}
 				f := goCommsNetDialer.NewSingleNetDialApp(
 					fmt.Sprintf("goPolygon-io Dialer"),
-					serviceIdentifier,
-					serviceDependentOn,
 					fmt.Sprintf("goPolygon-io Dialer"),
 					common.MoreOptions(
 						goCommsDefinitions.ProvideUrl("ConnectionUrl", u),
@@ -61,6 +61,14 @@ func ProvideDialer(
 						goCommsDefinitions.ProvideStringContext("Polygon-io.API.Key", params.ApiKey),
 						goCommsDefinitions.ProvideStringContext("Polygon-io.WS.FX.Registration.C", params.FxCurrencyRegistration),
 						goCommsDefinitions.ProvideStringContext("Polygon-io.WS.FX.Registration.CA", params.FxCurrencyAggregationRegistration),
+						PubSub.ProvidePubSubInstance("Application", params.PubSub),
+						fx.Provide(
+							fx.Annotated{
+								Target: func() GoFunctionCounter.IService {
+									return params.GoFunctionCounter
+								},
+							},
+						),
 						fx.Provide(
 							fx.Annotated{
 								Name: "Polygon",
