@@ -66,10 +66,7 @@ func (self *reactor) Open() error {
 }
 
 func (self *reactor) doNext(_ bool, i interface{}) {
-	_, err := self.messageRouter.Route(i)
-	if err != nil {
-		return
-	}
+	self.messageRouter.Route(i)
 }
 
 func (self *reactor) handleReaderWriter(msg *gomessageblock.ReaderWriter) error {
@@ -77,7 +74,7 @@ func (self *reactor) handleReaderWriter(msg *gomessageblock.ReaderWriter) error 
 	if err != nil {
 		return err
 	}
-	_, err = self.messageRouter.Route(marshal)
+	self.messageRouter.Route(marshal)
 	return err
 }
 func (self *reactor) handleTickerServiceResponse(msg *tickerServiceResponse) error {
@@ -123,7 +120,7 @@ func (self *reactor) handleWebSocketMessageWrapper(msg *wsmsg.WebSocketMessageWr
 			}
 			if dataResponse != nil {
 				for _, message := range dataResponse {
-					_, _ = self.messageRouter.Route(message)
+					self.messageRouter.Route(message)
 				}
 			}
 			return nil
@@ -138,7 +135,7 @@ func (self *reactor) handleWebSocketMessageWrapper(msg *wsmsg.WebSocketMessageWr
 				self.Logger.Error("error in Unmarshal PolygonMessageResponse", zap.Error(err))
 				return err
 			}
-			_, _ = self.messageRouter.Route(polyMessage)
+			self.messageRouter.Route(polyMessage)
 		}
 
 		return nil

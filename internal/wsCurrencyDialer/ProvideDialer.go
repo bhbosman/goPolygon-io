@@ -47,7 +47,6 @@ func ProvideDialer(
 				}
 				f := goCommsNetDialer.NewSingleNetDialApp(
 					fmt.Sprintf("goPolygon-io Dialer"),
-					fmt.Sprintf("goPolygon-io Dialer"),
 					common.MoreOptions(
 						goCommsDefinitions.ProvideUrl("ConnectionUrl", u),
 						goCommsDefinitions.ProvideUrl("ProxyUrl", nil),

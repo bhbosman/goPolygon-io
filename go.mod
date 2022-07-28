@@ -3,7 +3,7 @@ module github.com/bhbosman/goPolygon-io
 go 1.18
 
 require (
-	github.com/bhbosman/goCommsDefinitions v0.0.0-20220721070505-30206872567f
+	github.com/bhbosman/goCommsDefinitions v0.0.0-20220724214237-63eea03e3695
 	github.com/bhbosman/goCommsNetDialer v0.0.0-20220623084808-6238b44079be
 	github.com/bhbosman/goCommsStacks v0.0.0-20220628053835-8e5ac6a0c20b
 	github.com/bhbosman/goFxApp v0.0.0-20220627212218-a29bbf40d76d
@@ -20,14 +20,16 @@ require (
 	google.golang.org/protobuf v1.27.1
 )
 
-require golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f
+require (
+	github.com/cskr/pubsub v1.0.2
+	golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f
+)
 
 require (
 	github.com/bhbosman/goConnectionManager v0.0.0-20220721070628-0f4b3c036d93 // indirect
 	github.com/bhbosman/goFxAppManager v0.0.0-20220625173841-bbd050c3bfe2 // indirect
 	github.com/bhbosman/goUi v0.0.0-20220625174028-03193a90ee79 // indirect
 	github.com/cenkalti/backoff/v4 v4.1.2 // indirect
-	github.com/cskr/pubsub v1.0.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/emirpasic/gods v1.12.0 // indirect
 	github.com/gdamore/encoding v1.0.0 // indirect
