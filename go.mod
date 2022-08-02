@@ -3,11 +3,11 @@ module github.com/bhbosman/goPolygon-io
 go 1.18
 
 require (
-	github.com/bhbosman/goCommsDefinitions v0.0.0-20220724214237-63eea03e3695
+	github.com/bhbosman/goCommsDefinitions v0.0.0-20220801175552-c5aa68065af3
 	github.com/bhbosman/goCommsNetDialer v0.0.0-20220623084808-6238b44079be
 	github.com/bhbosman/goCommsStacks v0.0.0-20220628053835-8e5ac6a0c20b
 	github.com/bhbosman/goFxApp v0.0.0-20220627212218-a29bbf40d76d
-	github.com/bhbosman/gocommon v0.0.0-20220718213201-2711fee77ae4
+	github.com/bhbosman/gocommon v0.0.0-20220802132121-5e81013de07d
 	github.com/bhbosman/gocomms v0.0.0-20220628074707-e93417aaaed2
 	github.com/bhbosman/goerrors v0.0.0-20220623084908-4d7bbcd178cf
 	github.com/bhbosman/gomessageblock v0.0.0-20220617132215-32f430d7de62
@@ -17,7 +17,7 @@ require (
 	github.com/stretchr/testify v1.7.5
 	go.uber.org/fx v1.17.1
 	go.uber.org/zap v1.21.0
-	google.golang.org/protobuf v1.27.1
+	google.golang.org/protobuf v1.28.0
 )
 
 require (
@@ -26,9 +26,9 @@ require (
 )
 
 require (
-	github.com/bhbosman/goConnectionManager v0.0.0-20220721070628-0f4b3c036d93 // indirect
-	github.com/bhbosman/goFxAppManager v0.0.0-20220625173841-bbd050c3bfe2 // indirect
-	github.com/bhbosman/goUi v0.0.0-20220625174028-03193a90ee79 // indirect
+	github.com/bhbosman/goConnectionManager v0.0.0-20220802122816-d9db41f332dc // indirect
+	github.com/bhbosman/goFxAppManager v0.0.0-20220730103022-02c299931769 // indirect
+	github.com/bhbosman/goUi v0.0.0-20220802121659-b90381157031 // indirect
 	github.com/cenkalti/backoff/v4 v4.1.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/emirpasic/gods v1.12.0 // indirect
