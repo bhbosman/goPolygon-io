@@ -14,9 +14,9 @@ require (
 	github.com/bhbosman/goprotoextra v0.0.2-0.20210817141206-117becbef7c7
 	github.com/golang/protobuf v1.5.2
 	github.com/reactivex/rxgo/v2 v2.5.0
-	github.com/stretchr/testify v1.7.5
-	go.uber.org/fx v1.17.1
-	go.uber.org/zap v1.21.0
+	github.com/stretchr/testify v1.8.0
+	go.uber.org/fx v1.19.2
+	go.uber.org/zap v1.23.0
 	google.golang.org/protobuf v1.28.0
 )
 
@@ -51,14 +51,13 @@ require (
 	github.com/stretchr/objx v0.4.0 // indirect
 	github.com/teivah/onecontext v0.0.0-20200513185103-40f981bfd775 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
-	go.uber.org/dig v1.14.0 // indirect
+	go.uber.org/dig v1.16.1 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
 	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
 	golang.org/x/term v0.0.0-20210220032956-6a3ed077a48d // indirect
 	golang.org/x/text v0.3.7 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
-	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
