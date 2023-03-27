@@ -7,7 +7,7 @@ require (
 	github.com/bhbosman/goCommsNetDialer v0.0.0-20220623084808-6238b44079be
 	github.com/bhbosman/goCommsStacks v0.0.0-20220628053835-8e5ac6a0c20b
 	github.com/bhbosman/goFxApp v0.0.0-20220627212218-a29bbf40d76d
-	github.com/bhbosman/gocommon v0.0.0-20220802132121-5e81013de07d
+	github.com/bhbosman/gocommon v0.0.0-20230320083256-4088c43f62a7
 	github.com/bhbosman/gocomms v0.0.0-20220628074707-e93417aaaed2
 	github.com/bhbosman/goerrors v0.0.0-20220623084908-4d7bbcd178cf
 	github.com/bhbosman/gomessageblock v0.0.0-20220617132215-32f430d7de62
