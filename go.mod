@@ -94,7 +94,6 @@ replace github.com/bhbosman/goerrors => ../goerrors
 
 replace github.com/bhbosman/goConnectionManager => ../goConnectionManager
 
-replace github.com/rivo/tview => ../tview
 
 replace github.com/bhbosman/goprotoextra => ../goprotoextra
 
