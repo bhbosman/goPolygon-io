@@ -14,6 +14,7 @@ import (
 	"github.com/bhbosman/gocommon/services/interfaces"
 	"github.com/bhbosman/gocommon/stream"
 	"github.com/bhbosman/gocomms/common"
+	"github.com/bhbosman/gocomms/intf"
 	"github.com/bhbosman/gomessageblock"
 	"github.com/cskr/pubsub"
 	"github.com/golang/protobuf/jsonpb"
@@ -25,7 +26,7 @@ import (
 
 type reactor struct {
 	common.BaseConnectionReactor
-	messageRouter             *messageRouter.MessageRouter
+	messageRouter             messageRouter.IMessageRouter
 	connectionStatus          string
 	apiKey                    string
 	fxRegistration            string
@@ -38,14 +39,9 @@ func (self *reactor) Close() error {
 	return err
 }
 
-func (self *reactor) Init(
-	onSendToReactor rxgo.NextFunc,
-	onSendToConnection rxgo.NextFunc,
-) (rxgo.NextFunc, rxgo.ErrFunc, rxgo.CompletedFunc, error) {
+func (self *reactor) Init(params intf.IInitParams) (rxgo.NextFunc, rxgo.ErrFunc, rxgo.CompletedFunc, error) {
 	_, _, _, err := self.BaseConnectionReactor.Init(
-		onSendToReactor,
-		onSendToConnection,
-	)
+		params)
 	if err != nil {
 		return nil, nil, nil, err
 	}
