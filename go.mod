@@ -90,6 +90,6 @@ replace github.com/bhbosman/goConnectionManager => ../goConnectionManager
 
 replace github.com/rivo/tview => ../tview
 
-replace github.com/bhbosman/goprotoextra => ../goprotoextra
+//replace github.com/bhbosman/goprotoextra => ../goprotoextra
 
 replace github.com/cskr/pubsub => github.com/bhbosman/pubsub v1.0.3-0.20220802200819-029949e8a8af
