@@ -1,15 +1,15 @@
 package wsCurrencyDialer
 
 import (
+	"context"
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	"github.com/bhbosman/gocommon/GoFunctionCounter"
-	"github.com/bhbosman/gocommon/Services/interfaces"
 	"github.com/bhbosman/gocommon/model"
+	"github.com/bhbosman/gocommon/services/interfaces"
 	"github.com/bhbosman/gocomms/intf"
 	"github.com/cskr/pubsub"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
-	"golang.org/x/net/context"
 )
 
 func ProvideConnectionReactor() fx.Option {
