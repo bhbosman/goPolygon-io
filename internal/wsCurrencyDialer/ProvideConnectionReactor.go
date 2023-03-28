@@ -4,8 +4,8 @@ import (
 	"context"
 	"github.com/bhbosman/goPolygon-io/internal/rest/ReferenceApi/TickersService"
 	"github.com/bhbosman/gocommon/GoFunctionCounter"
-	"github.com/bhbosman/gocommon/Services/interfaces"
 	"github.com/bhbosman/gocommon/model"
+	"github.com/bhbosman/gocommon/services/interfaces"
 	"github.com/bhbosman/gocomms/intf"
 	"github.com/cskr/pubsub"
 	"go.uber.org/fx"
@@ -18,19 +18,19 @@ func ProvideConnectionReactor() fx.Option {
 			fx.Annotated{
 				Target: func(
 					params struct {
-					fx.In
-					CancelCtx                         context.Context
-					CancelFunc                        context.CancelFunc
-					ConnectionCancelFunc              model.ConnectionCancelFunc
-					Logger                            *zap.Logger
-					TickersService                    TickersService.ITickersService `name:"Polygon"`
-					ApiKey                            string                         `name:"Polygon-io.API.Key"`
-					FxCurrencyRegistration            string                         `name:"Polygon-io.WS.FX.Registration.C"`
-					FxCurrencyAggregationRegistration string                         `name:"Polygon-io.WS.FX.Registration.CA"`
-					UniqueReferenceService            interfaces.IUniqueReferenceService
-					PubSub                            *pubsub.PubSub
-					GoFunctionCounter                 GoFunctionCounter.IService
-				},
+						fx.In
+						CancelCtx                         context.Context
+						CancelFunc                        context.CancelFunc
+						ConnectionCancelFunc              model.ConnectionCancelFunc
+						Logger                            *zap.Logger
+						TickersService                    TickersService.ITickersService `name:"Polygon"`
+						ApiKey                            string                         `name:"Polygon-io.API.Key"`
+						FxCurrencyRegistration            string                         `name:"Polygon-io.WS.FX.Registration.C"`
+						FxCurrencyAggregationRegistration string                         `name:"Polygon-io.WS.FX.Registration.CA"`
+						UniqueReferenceService            interfaces.IUniqueReferenceService
+						PubSub                            *pubsub.PubSub
+						GoFunctionCounter                 GoFunctionCounter.IService
+					},
 				) (intf.IConnectionReactor, error) {
 					result := NewConnectionReactor(
 						params.Logger,
