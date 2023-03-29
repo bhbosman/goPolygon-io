@@ -53,9 +53,9 @@ func ProvideDialer(
 						goCommsDefinitions.ProvideBool("UseProxy", false),
 					), common.NewConnectionInstanceOptions(
 						goCommsDefinitions.ProvideTransportFactoryForWebSocketName(
-							topStack.ProvideTopStack(),
+							topStack.Provide(),
 							bottom.Provide(),
-							websocket.ProvideWebsocketStacks(),
+							websocket.Provide(),
 						),
 						goCommsDefinitions.ProvideStringContext("Polygon-io.API.Key", params.ApiKey),
 						goCommsDefinitions.ProvideStringContext("Polygon-io.WS.FX.Registration.C", params.FxCurrencyRegistration),
