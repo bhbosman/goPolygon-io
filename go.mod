@@ -13,18 +13,18 @@ require (
 	github.com/bhbosman/gomessageblock v0.0.0-20250307141417-ab783e8e2eba
 	github.com/bhbosman/goprotoextra v0.0.2
 	github.com/cskr/pubsub v1.0.2
-	github.com/golang/protobuf v1.5.2
+	github.com/golang/protobuf v1.5.4
 	github.com/reactivex/rxgo/v2 v2.5.0
 	github.com/stretchr/testify v1.10.0
 	go.uber.org/fx v1.23.0
 	go.uber.org/zap v1.27.0
-	google.golang.org/protobuf v1.28.0
+	google.golang.org/protobuf v1.36.5
 )
 
 require (
 	github.com/bhbosman/goConnectionManager v0.0.0-20250308054322-587c786bedb0 // indirect
-	github.com/bhbosman/goFxAppManager v0.0.0-20250307225418-ef314d0a9319 // indirect
-	github.com/bhbosman/goUi v0.0.0-20250308052840-a0e5fd7e5f88 // indirect
+	github.com/bhbosman/goFxAppManager v0.0.0-20250308052839-63033ea503a7 // indirect
+	github.com/bhbosman/goUi v0.0.0-20250308064519-26f29e163722 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/emirpasic/gods v1.18.1 // indirect
