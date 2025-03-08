@@ -6,11 +6,11 @@ toolchain go1.24.0
 
 require (
 	github.com/bhbosman/goCommsDefinitions v0.0.0-20250308000247-4306925b3dfd
-	github.com/bhbosman/goCommsNetDialer v0.0.0-20250307233555-6c2dfa80f01b
-	github.com/bhbosman/goCommsStacks v0.0.0-20231011182118-47d6d38b38e4
-	github.com/bhbosman/goFxApp v0.0.0-20250307230611-15e28b32dfad
+	github.com/bhbosman/goCommsNetDialer v0.0.0-20250308053613-a763632f1b3d
+	github.com/bhbosman/goCommsStacks v0.0.0-20250308055233-8992b9d0c219
+	github.com/bhbosman/goFxApp v0.0.0-20250308052840-c690d60e479d
 	github.com/bhbosman/gocommon v0.0.0-20250308052839-0ebeb121f996
-	github.com/bhbosman/gocomms v0.0.0-20250308000247-0dafbc2926a9
+	github.com/bhbosman/gocomms v0.0.0-20250308053431-cfd3e830d8a5
 	github.com/bhbosman/goerrors v0.0.0-20250307194237-312d070c8e38
 	github.com/bhbosman/gomessageblock v0.0.0-20250307141417-ab783e8e2eba
 	github.com/bhbosman/goprotoextra v0.0.2
@@ -24,7 +24,7 @@ require (
 )
 
 require (
-	github.com/bhbosman/goConnectionManager v0.0.0-20250307224538-a79ceb218fd0 // indirect
+	github.com/bhbosman/goConnectionManager v0.0.0-20250308054322-587c786bedb0 // indirect
 	github.com/bhbosman/goFxAppManager v0.0.0-20250307225418-ef314d0a9319 // indirect
 	github.com/bhbosman/goUi v0.0.0-20250308052840-a0e5fd7e5f88 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
@@ -39,13 +39,11 @@ require (
 	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/icza/gox v0.2.0 // indirect
 	github.com/kr/pretty v0.3.1 // indirect
-	github.com/kr/text v0.2.0 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rivo/tview v0.0.0-20241227133733-17b7edb88c57 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
-	github.com/rogpeppe/go-internal v1.9.0 // indirect
 	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/teivah/onecontext v1.3.0 // indirect
 	go.uber.org/dig v1.18.1 // indirect
