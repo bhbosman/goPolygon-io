@@ -24,7 +24,6 @@ require (
 )
 
 require (
-	github.com/bhbosman/goConn v0.0.0-20250307235008-177f4ffe3521 // indirect
 	github.com/bhbosman/goConnectionManager v0.0.0-20250307224538-a79ceb218fd0 // indirect
 	github.com/bhbosman/goFxAppManager v0.0.0-20250307225418-ef314d0a9319 // indirect
 	github.com/bhbosman/goUi v0.0.0-20250308052840-a0e5fd7e5f88 // indirect
